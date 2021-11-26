@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _25_11_Werkcollege
+namespace _25_11_Magweg
 {
     internal static class Program
     {
@@ -16,7 +16,7 @@ namespace _25_11_Werkcollege
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Mandelbrot());
+            Application.Run(new Form1());
         }
     }
 }

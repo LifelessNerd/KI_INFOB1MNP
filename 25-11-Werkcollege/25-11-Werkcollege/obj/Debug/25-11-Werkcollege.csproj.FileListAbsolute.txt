@@ -1,0 +1,11 @@
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Werkcollege\25-11-Werkcollege\bin\Debug\25-11-Werkcollege.exe.config
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Werkcollege\25-11-Werkcollege\bin\Debug\25-11-Werkcollege.exe
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Werkcollege\25-11-Werkcollege\bin\Debug\25-11-Werkcollege.pdb
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Werkcollege\25-11-Werkcollege\obj\Debug\25-11-Werkcollege.csproj.AssemblyReference.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Werkcollege\25-11-Werkcollege\obj\Debug\25-11-Werkcollege.csproj.SuggestedBindingRedirects.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Werkcollege\25-11-Werkcollege\obj\Debug\_25_11_Werkcollege.Mandelbrot.resources
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Werkcollege\25-11-Werkcollege\obj\Debug\_25_11_Werkcollege.Properties.Resources.resources
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Werkcollege\25-11-Werkcollege\obj\Debug\25-11-Werkcollege.csproj.GenerateResource.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Werkcollege\25-11-Werkcollege\obj\Debug\25-11-Werkcollege.csproj.CoreCompileInputs.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Werkcollege\25-11-Werkcollege\obj\Debug\25-11-Werkcollege.exe
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Werkcollege\25-11-Werkcollege\obj\Debug\25-11-Werkcollege.pdb

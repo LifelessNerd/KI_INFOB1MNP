@@ -1,0 +1,11 @@
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Magweg\25-11-Magweg\bin\Debug\25-11-Magweg.exe.config
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Magweg\25-11-Magweg\bin\Debug\25-11-Magweg.exe
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Magweg\25-11-Magweg\bin\Debug\25-11-Magweg.pdb
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Magweg\25-11-Magweg\obj\Debug\25-11-Magweg.csproj.AssemblyReference.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Magweg\25-11-Magweg\obj\Debug\25-11-Magweg.csproj.SuggestedBindingRedirects.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Magweg\25-11-Magweg\obj\Debug\_25_11_Magweg.Form1.resources
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Magweg\25-11-Magweg\obj\Debug\_25_11_Magweg.Properties.Resources.resources
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Magweg\25-11-Magweg\obj\Debug\25-11-Magweg.csproj.GenerateResource.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Magweg\25-11-Magweg\obj\Debug\25-11-Magweg.csproj.CoreCompileInputs.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Magweg\25-11-Magweg\obj\Debug\25-11-Magweg.exe
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Magweg\25-11-Magweg\obj\Debug\25-11-Magweg.pdb

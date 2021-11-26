@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "25-11-Bagger", "25-11-Bagger\25-11-Bagger.csproj", "{CE10A399-F69D-4253-A348-005D81FCC829}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE10A399-F69D-4253-A348-005D81FCC829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE10A399-F69D-4253-A348-005D81FCC829}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE10A399-F69D-4253-A348-005D81FCC829}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE10A399-F69D-4253-A348-005D81FCC829}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86D327AB-2A76-4686-B7DD-E71795D5942E}
+	EndGlobalSection
+EndGlobal

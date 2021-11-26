@@ -1,0 +1,15 @@
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\bin\Debug\net6.0\25-11-Bagger.exe
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\bin\Debug\net6.0\25-11-Bagger.deps.json
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\bin\Debug\net6.0\25-11-Bagger.runtimeconfig.json
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\bin\Debug\net6.0\25-11-Bagger.dll
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\bin\Debug\net6.0\ref\25-11-Bagger.dll
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\bin\Debug\net6.0\25-11-Bagger.pdb
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\obj\Debug\net6.0\25-11-Bagger.csproj.AssemblyReference.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\obj\Debug\net6.0\25-11-Bagger.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\obj\Debug\net6.0\25-11-Bagger.AssemblyInfoInputs.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\obj\Debug\net6.0\25-11-Bagger.AssemblyInfo.cs
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\obj\Debug\net6.0\25-11-Bagger.csproj.CoreCompileInputs.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\obj\Debug\net6.0\25-11-Bagger.dll
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\obj\Debug\net6.0\ref\25-11-Bagger.dll
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\obj\Debug\net6.0\25-11-Bagger.pdb
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\25-11-Bagger\25-11-Bagger\obj\Debug\net6.0\25-11-Bagger.genruntimeconfig.cache

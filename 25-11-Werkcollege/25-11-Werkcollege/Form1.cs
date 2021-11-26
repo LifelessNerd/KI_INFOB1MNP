@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace _25_11_Werkcollege
 {
-    public partial class Form1 : Form
+    public partial class Mandelbrot : Form
     {
-        public Form1()
+        public Mandelbrot()
         {
-            InitializeComponent();
+            
+        }
+
+        private (double, double) okBoxClicked(object sender, EventArgs e)
+        {
+            
+            double d1 = 2;
+            double d2 = 2;
+            return (d1, d2);
         }
     }
 }

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{35CD4D5B-4389-4E0C-8F5E-C9986B29E8F0}</ProjectGuid>
+    <ProjectGuid>{A778A4E0-0CDE-4128-A4B7-15ECC66AE458}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>_25_11_Werkcollege</RootNamespace>
-    <AssemblyName>25-11-Werkcollege</AssemblyName>
+    <RootNamespace>_25_11_Magweg</RootNamespace>
+    <AssemblyName>25-11-Magweg</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
