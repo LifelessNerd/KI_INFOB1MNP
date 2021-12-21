@@ -12,15 +12,17 @@ namespace Reversi__Git_
 {
     public partial class Form1 : Form
     {
+        int maxXelementen = 6;
+        int maxYelementen = 6;
+
         public Form1()
         {
+           
             InitializeComponent();
             Panel panel = new Panel();
             this.Size = new Size(800, 800);
             this.Controls.Add(panel);
-
-            int maxXelementen = 6;
-            int maxYelementen = 6;
+            panel.Paint += this.Tekenen;
 
             panel.Size = new Size(maxXelementen * 100, maxYelementen * 100);
             panel.BackColor = Color.Gray;
@@ -32,8 +34,9 @@ namespace Reversi__Git_
 
             for (int i = 0; i < maxXelementen; i++)
             {
-                for (int j = 0; j < maxYelementen; j++) {
-
+                for (int j = 0; j < maxYelementen; j++) 
+                {
+                    
                     raster[i, j] = raster[i, j];
                     
                 }
@@ -49,13 +52,38 @@ namespace Reversi__Git_
                 Console.WriteLine("");
             }
             //Print mechanisme
-
+            panel.Invalidate();
             //MaakSpeelveld(panel);
 
         }
-        public void MaakSpeelveld(Panel panel)
+        public void TekenPionnen(object sender, PaintEventArgs pea)
         {
-            
+            //Waarde van array = 0; leeg. = 1 van sp1 = 2 van sp2.
+            Graphics g = pea.Graphics;
+            for (int i = 0; i < maxXelementen; i++)
+            {
+                for (int j = 0; j < maxYelementen; j++) 
+                {                                    
+                    if(raster[i, j]) == 1)           
+
+                }
+            }
+        }
+        public void Tekenen(object sender, PaintEventArgs pea)
+        {
+            Graphics g = pea.Graphics;
+            for(int i = 1; i <= maxXelementen; i++ )
+            {
+                Point point1 = new Point(100 * i, 0);
+                Point point2 = new Point(100 * i, maxYelementen * 100);
+                g.DrawLine(Pens.Black, point1, point2);
+            }
+            for(int i = 1; i <= maxYelementen; i++ )
+            {
+                Point point1 = new Point(0, 100 * i);
+                Point point2 = new Point(maxXelementen * 100, 100 * i);
+                g.DrawLine(Pens.Black, point1, point2);
+            }
         }
     }
 }
