@@ -35,17 +35,27 @@ namespace Reversi__Git_
                 for (int j = 0; j < maxYelementen; j++) {
 
                     raster[i, j] = raster[i, j];
-                    //raster = new int[,] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 } };
+                    
                 }
             }
-            Console.WriteLine(String.Join(" ", raster.Cast<int>()));
+
+            //Print mechanisme
+            for (int i = 0; i < raster.GetLength(0); i++)
+            {
+                for (int j = 0; j < raster.GetLength(1); j++)
+                {
+                    Console.Write(raster[i, j].ToString() + " ");
+                }
+                Console.WriteLine("");
+            }
+            //Print mechanisme
 
             //MaakSpeelveld(panel);
 
         }
         public void MaakSpeelveld(Panel panel)
         {
-            RadioButton rb = new RadioButton();
+            
         }
     }
 }
