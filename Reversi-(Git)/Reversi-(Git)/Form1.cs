@@ -14,6 +14,7 @@ namespace Reversi__Git_
     {
         int maxXelementen = 6;
         int maxYelementen = 6;
+        int[,] raster = new int[6, 6]; //TODO: fixen dat dit ook kan met variabelen (die hierboven)
 
         public Form1()
         {
@@ -22,6 +23,7 @@ namespace Reversi__Git_
             Panel panel = new Panel();
             this.Size = new Size(800, 800);
             this.Controls.Add(panel);
+            panel.Paint += this.TekenPionnen;
             panel.Paint += this.Tekenen;
 
             panel.Size = new Size(maxXelementen * 100, maxYelementen * 100);
@@ -29,18 +31,6 @@ namespace Reversi__Git_
 
             int rowWidth = panel.Width / maxXelementen;
             int rowHeight = panel.Height / maxYelementen;
-
-            int[,] raster = new int[maxXelementen, maxYelementen];
-
-            for (int i = 0; i < maxXelementen; i++)
-            {
-                for (int j = 0; j < maxYelementen; j++) 
-                {
-                    
-                    raster[i, j] = raster[i, j];
-                    
-                }
-            }
 
             //Print mechanisme
             for (int i = 0; i < raster.GetLength(0); i++)
@@ -52,8 +42,8 @@ namespace Reversi__Git_
                 Console.WriteLine("");
             }
             //Print mechanisme
+
             panel.Invalidate();
-            //MaakSpeelveld(panel);
 
         }
         public void TekenPionnen(object sender, PaintEventArgs pea)
@@ -64,7 +54,16 @@ namespace Reversi__Git_
             {
                 for (int j = 0; j < maxYelementen; j++) 
                 {                                    
-                    if(raster[i, j]) == 1)           
+                    switch(raster[i,j])
+                    {
+                        case 0:
+                            Console.WriteLine("raster with " + i + "," + j + ": 0");
+                            break;
+                        case 1:
+                            Console.WriteLine("raster with " + i + "," + j + ": 1");
+                            break;
+                    
+                    }
 
                 }
             }
