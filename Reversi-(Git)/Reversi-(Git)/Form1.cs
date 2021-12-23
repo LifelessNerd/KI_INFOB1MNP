@@ -15,16 +15,18 @@ namespace Reversi__Git_
         int maxXelementen = 6;
         int maxYelementen = 6;
         int[,] raster = new int[6, 6]; //TODO: fixen dat dit ook kan met variabelen (die hierboven)
+        bool Speler1Zet = true;
+        Panel panel = new Panel();
 
         public Form1()
         {
            
-            InitializeComponent();
-            Panel panel = new Panel();
+            InitializeComponent();           
             this.Size = new Size(800, 800);
             this.Controls.Add(panel);
             panel.Paint += this.TekenPionnen;
             panel.Paint += this.Tekenen;
+            panel.MouseClick += this.Klik;
 
             panel.Size = new Size(maxXelementen * 100, maxYelementen * 100);
             panel.BackColor = Color.Gray;
@@ -32,6 +34,10 @@ namespace Reversi__Git_
             int rowWidth = panel.Width / maxXelementen;
             int rowHeight = panel.Height / maxYelementen;
 
+            raster[2, 2] = 1;
+            raster[3, 3] = 1;
+            raster[3, 2] = 2;
+            raster[2, 3] = 2;
             //Print mechanisme
             for (int i = 0; i < raster.GetLength(0); i++)
             {
@@ -60,7 +66,12 @@ namespace Reversi__Git_
                             Console.WriteLine("raster with " + i + "," + j + ": 0");
                             break;
                         case 1:
-                            Console.WriteLine("raster with " + i + "," + j + ": 1");
+                            Rectangle speler1 = new Rectangle( 100 * i + 10 , 100 * j + 10, 100 - 20, 100 - 20);
+                            g.FillEllipse(Brushes.Black, speler1);
+                            break;
+                        case 2:
+                            Rectangle speler2 = new Rectangle( 100 * i + 10 , 100 * j + 10, 100 - 20, 100 - 20);
+                            g.FillEllipse(Brushes.White, speler2);
                             break;
                     
                     }
@@ -83,6 +94,27 @@ namespace Reversi__Git_
                 Point point2 = new Point(maxXelementen * 100, 100 * i);
                 g.DrawLine(Pens.Black, point1, point2);
             }
+        }
+        public void Klik(object sender, MouseEventArgs mea)
+        {
+            Console.WriteLine("je moeder");
+            int KlikX = mea.X;
+            int KlikY = mea.Y;
+            int RasterX = KlikX / 100;
+            int RasterY = KlikY / 100;
+            Console.WriteLine(KlikX + " gaat naar " + RasterX);
+            Console.WriteLine(KlikY + " gaat naar " + RasterY);
+            if(Speler1Zet)
+            {
+                raster[RasterX, RasterY] = 1;
+                Speler1Zet = false;            
+            }    
+            else()
+            {
+                raster[RasterX, RasterY] = 2;
+                Speler1Zet=true;
+            }
+            panel.Invalidate();
         }
     }
 }
