@@ -102,19 +102,51 @@ namespace Reversi__Git_
             int KlikY = mea.Y;
             int RasterX = KlikX / 100;
             int RasterY = KlikY / 100;
+            Point klikPunt = new Point(RasterX, RasterY);
             Console.WriteLine(KlikX + " gaat naar " + RasterX);
             Console.WriteLine(KlikY + " gaat naar " + RasterY);
-            if(Speler1Zet)
+
+            if (CheckZetLegaal(klikPunt))
             {
-                raster[RasterX, RasterY] = 1;
-                Speler1Zet = false;            
-            }    
-            else()
-            {
-                raster[RasterX, RasterY] = 2;
-                Speler1Zet=true;
+
+                if (Speler1Zet)
+                {
+                    raster[RasterX, RasterY] = 1;
+                    Speler1Zet = false;
+                }
+                else
+                {
+                    raster[RasterX, RasterY] = 2;
+                    Speler1Zet = true;
+                }
+                panel.Invalidate();
+            } else {
+                Console.WriteLine("Zet mag niet!");
+                // code met graphics zo van: kan niet idioot
             }
-            panel.Invalidate();
+        }
+        public bool CheckZetLegaal(Point klikPunt)
+        {
+            bool zetLegaal = false;
+            // rijtje checks
+            bool duplicateLocatie = duplicateLocatieCheck(klikPunt);
+            
+            //
+            if (duplicateLocatie)
+            {
+                zetLegaal = true;
+            }
+            return zetLegaal;
+        }
+
+        public bool duplicateLocatieCheck(Point klikPunt)
+        {
+            bool zetLegaal = false;
+            if (raster[klikPunt.X, klikPunt.Y] == 0 || raster[klikPunt.X, klikPunt.Y] == 3)
+            {
+                zetLegaal = true;
+            }
+            return zetLegaal;
         }
     }
 }
