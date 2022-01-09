@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,7 +15,7 @@ namespace Reversi__Git_
     {
         int maxElementen = 6;
         int[,] raster = new int[6, 6]; //TODO: fixen dat dit ook kan met variabelen (die hierboven)
-        bool Speler1Zet = true;
+        bool speler1Zet = true;
         Panel speelveldPanel = new Panel();
         Panel scorePanel = new Panel();
 
@@ -40,19 +41,19 @@ namespace Reversi__Git_
             int rowHeight = speelveldPanel.Height / maxElementen;
 
             //Scorepanel 
-            scorePanel.Size = new Size(600, 100);
+            scorePanel.Size = new Size(maxElementen * 100, 100);
             scorePanel.Location = new Point(0, (maxElementen * 100) + 10);
             scorePanel.BackColor = Color.FromArgb(60, 19, 50, 80);
             scorePanel.Paint += this.TekenScorepanel;
             this.Controls.Add(scorePanel);
 
             
-
+            //Begin van speelveld met 2 stenen voor elk team
             raster[2, 2] = 1;
             raster[3, 3] = 1;
             raster[3, 2] = 2;
             raster[2, 3] = 2;
-            //Print mechanisme
+            /*/Print mechanisme
             for (int i = 0; i < raster.GetLength(0); i++)
             {
                 for (int j = 0; j < raster.GetLength(1); j++)
@@ -61,7 +62,7 @@ namespace Reversi__Git_
                 }
                 Console.WriteLine("");
             }
-            //Print mechanisme
+            /*/
 
             speelveldPanel.Invalidate();
             scorePanel.Invalidate();
@@ -70,6 +71,8 @@ namespace Reversi__Git_
 
         public void TekenScorepanel(object sender, PaintEventArgs pea)
         {
+            //Tekent scorepaneel, is gekoppeld aan Paint event
+            //Scorebord met score voor beide teams
             int speler1Stenen = 0;
             int speler2Stenen = 0;
 
@@ -79,6 +82,8 @@ namespace Reversi__Git_
             g.FillEllipse(speler2Kleur, scorePanel.Width - scorePanel.Height + 10, 10, scorePanel.Height - 20, scorePanel.Height - 20);
             g.DrawEllipse(Pens.Black, scorePanel.Width - scorePanel.Height + 10, 10, scorePanel.Height - 20, scorePanel.Height - 20);
 
+
+            //Checkt hoeveel stenen elk team heeft door door de array te loopen en elke element te checken op 1 of 92
             for (int i = 0; i < maxElementen; i++)
             {
                 for (int j = 0; j < maxElementen; j++)
@@ -94,21 +99,37 @@ namespace Reversi__Git_
 
                 }
             }
-            StringFormat format = new StringFormat();
-            format.Alignment = StringAlignment.Center;
-            format.LineAlignment = StringAlignment.Center;
+            //Format voor score van stenen per team
+            StringFormat scoreFormat = new StringFormat();
+            scoreFormat.Alignment = StringAlignment.Center;
+            scoreFormat.LineAlignment = StringAlignment.Center;
+            Font arial16Font = new Font("Arial", 16);
 
-            Font drawFont = new Font("Arial", 16);
+            g.DrawString(speler1Stenen.ToString(), new Font("Arial", 32) ,Brushes.White, 50, scorePanel.Height /2 , scoreFormat);
+            g.DrawString(speler2Stenen.ToString(), new Font("Arial", 32), Brushes.Black, scorePanel.Width - 50, scorePanel.Height / 2, scoreFormat);
 
-            g.DrawString(speler1Stenen.ToString(), new Font("Arial", 32) ,Brushes.White, 50, scorePanel.Height /2 , format);
-            g.DrawString(speler2Stenen.ToString(), new Font("Arial", 32), Brushes.Black, scorePanel.Width - 50, scorePanel.Height / 2, format);
+            //Veranderd wie er aan de beurt is op grafisch niveau
+            StringFormat teamAanZetFormat = new StringFormat();
+            teamAanZetFormat.Alignment = StringAlignment.Center;
+            teamAanZetFormat.LineAlignment = StringAlignment.Center;
 
+            if (speler1Zet)
+            {
+                g.DrawString("SPELER 1 \nIS AAN ZET", new Font("Cascadia Mono SemiBold", 32), Brushes.Black, scorePanel.Width / 2, scorePanel.Height / 2, teamAanZetFormat);
+            }
+            else
+            {
+                g.DrawString("SPELER 2 \nIS AAN ZET", new Font("Cascadia Mono SemiBold", 32), Brushes.Black, scorePanel.Width / 2, scorePanel.Height / 2, teamAanZetFormat);
+
+            }
+            
         }
 
         public void TekenPionnen(object sender, PaintEventArgs pea)
         {
             //Waarde van array = 0; leeg. = 1 van sp1 = 2 van sp2.
             Graphics g = pea.Graphics;
+            Console.WriteLine("\n");
             for (int i = 0; i < maxElementen; i++)
             {
                 for (int j = 0; j < maxElementen; j++) 
@@ -119,10 +140,12 @@ namespace Reversi__Git_
                             Console.WriteLine("raster with " + i + "," + j + ": 0");
                             break;
                         case 1:
+                            Console.WriteLine("raster with " + i + "," + j + ": 1");
                             Rectangle speler1 = new Rectangle( 100 * i + 10 , 100 * j + 10, 100 - 20, 100 - 20);
                             g.FillEllipse(speler1Kleur, speler1);
                             break;
                         case 2:
+                            Console.WriteLine("raster with " + i + "," + j + ": 2");
                             Rectangle speler2 = new Rectangle( 100 * i + 10 , 100 * j + 10, 100 - 20, 100 - 20);
                             g.FillEllipse(speler2Kleur, speler2);
                             break;
@@ -151,31 +174,31 @@ namespace Reversi__Git_
         }
         public void Klik(object sender, MouseEventArgs mea)
         {
-            Console.WriteLine("je moeder");
+
             int KlikX = mea.X;
             int KlikY = mea.Y;
             int RasterX = KlikX / 100;
             int RasterY = KlikY / 100;
             Point klikPunt = new Point(RasterX, RasterY);
-            Console.WriteLine(KlikX + " gaat naar " + RasterX);
-            Console.WriteLine(KlikY + " gaat naar " + RasterY);
 
             if (CheckZetLegaal(klikPunt))
             {
 
-                if (Speler1Zet)
+                if (speler1Zet)
                 {
                     raster[RasterX, RasterY] = 1;
-                    Speler1Zet = false;
+                    speler1Zet = false;
                 }
                 else
                 {
                     raster[RasterX, RasterY] = 2;
-                    Speler1Zet = true;
+                    speler1Zet = true;
                 }
                 speelveldPanel.Invalidate();
             } else {
                 Console.WriteLine("Zet mag niet!");
+                SoundPlayer soundPlayer = new SoundPlayer(Reversi__Git_.Properties.Resources.errorSoundReversi);
+                soundPlayer.Play();
                 // code met graphics zo van: kan niet idioot
             }
         }
