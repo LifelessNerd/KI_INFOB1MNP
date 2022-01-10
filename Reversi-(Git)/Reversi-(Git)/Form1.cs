@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Reversi__Git_
@@ -18,6 +11,8 @@ namespace Reversi__Git_
         bool speler1Zet = true;
         Panel speelveldPanel = new Panel();
         Panel scorePanel = new Panel();
+        int speler1Stenen = 0;
+        int speler2Stenen = 0;
 
         //Kleuren
         SolidBrush speler1Kleur = new SolidBrush(Color.FromArgb(77, 69, 68));
@@ -63,18 +58,30 @@ namespace Reversi__Git_
                 Console.WriteLine("");
             }
             /*/
+            //Menu
+            
+            //ToolStripMenuItem menu = new ToolStripMenuItem("Opties");
+            //menu.DropDownItems.Add("Herstart", null, this.Herstart);
+            
 
             speelveldPanel.Invalidate();
             scorePanel.Invalidate();
+            
+        }
 
+        private void Herstart(object sender, EventArgs e)
+        {
+            Console.WriteLine("Restart");
+            // zet alle items in 2d array naar 0
         }
 
         public void TekenScorepanel(object sender, PaintEventArgs pea)
         {
             //Tekent scorepaneel, is gekoppeld aan Paint event
             //Scorebord met score voor beide teams
-            int speler1Stenen = 0;
-            int speler2Stenen = 0;
+            speler1Stenen = 0;
+            speler2Stenen = 0;
+
 
             Graphics g = pea.Graphics;
             g.FillEllipse(speler1Kleur, 10, 10, scorePanel.Height - 20, scorePanel.Height - 20);
@@ -83,22 +90,44 @@ namespace Reversi__Git_
             g.DrawEllipse(Pens.Black, scorePanel.Width - scorePanel.Height + 10, 10, scorePanel.Height - 20, scorePanel.Height - 20);
 
 
-            //Checkt hoeveel stenen elk team heeft door door de array te loopen en elke element te checken op 1 of 92
+            //Checkt hoeveel stenen elk team heeft door door de array te loopen en elke element te checken op 1 of 2
             for (int i = 0; i < maxElementen; i++)
             {
                 for (int j = 0; j < maxElementen; j++)
                 {
-                    if (raster[i,j] == 1)
+                    if (raster[i, j] == 1)
                     {
                         speler1Stenen++;
-                    } 
-                    else if (raster[i,j] == 2)
+                    }
+                    else if (raster[i, j] == 2)
                     {
                         speler2Stenen++;
                     }
 
                 }
             }
+
+            //Checkt de status van het spel; is er door iemand gewonnen na de laatste zet?
+            //Check of spel klaar is of niet and handle accordingly
+            switch (CheckSpelGewonnen())
+            {
+                case 0:
+                    Console.WriteLine("Spel is nog bezig: geen winnaar");
+                    break;
+                case 1:
+                    Console.WriteLine("Speler 1 heeft gewonnen!");
+                    break;
+                case 2:
+                    Console.WriteLine("Speler 2 heeft gewonnen!");
+                    break;
+                case 3:
+                    Console.WriteLine("Het is gelijkspel!");
+                    break;
+                default:
+                    Console.WriteLine("Shit gaat fout");
+                    break;
+            }
+
             //Format voor score van stenen per team
             StringFormat scoreFormat = new StringFormat();
             scoreFormat.Alignment = StringAlignment.Center;
@@ -197,16 +226,63 @@ namespace Reversi__Git_
                 speelveldPanel.Invalidate();
             } else {
                 Console.WriteLine("Zet mag niet!");
-                SoundPlayer soundPlayer = new SoundPlayer(Reversi__Git_.Properties.Resources.errorSoundReversi);
-                soundPlayer.Play();
+                //SoundPlayer soundPlayer = new SoundPlayer(Reversi__Git_.Properties.Resources.errorSoundReversi);
+                //soundPlayer.Play();
+                DialogResult res = MessageBox.Show("Zet kan niet!", "Zet kan niet!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 // code met graphics zo van: kan niet idioot
             }
+            
         }
-        public bool CheckZetLegaal(Point klikPunt)
+        public int CheckSpelGewonnen()
+        {
+
+            //Bij 0; nog niet bepaald, bij 1: speler 1, bij 2: speler 2, bij 3: gelijkspel
+            int spelerGewonnen = 0;
+            bool rasterCheck = false;
+            bool nulGevonden = false;
+            //check of array helemaal gevuld is; anders is het spel nog bezig
+            while (!nulGevonden && t <= 38)
+            {
+                for (int i = 0; i < maxElementen; i++)
+                {
+                    for (int j = 0; j < maxElementen; j++)
+                    {
+                        if (raster[i, j] == 0)
+                        {
+                            nulGevonden = true;
+                            spelerGewonnen = 0;
+                            
+                        }
+                    } 
+                }
+            } //TODO: Dit is scuffed, komt in infi loop weet niet hoe te fixen
+
+
+            if (!nulGevonden)
+            {
+                if (speler1Stenen > speler2Stenen)
+                {
+                    spelerGewonnen = 1;
+                }
+                else if (speler2Stenen > speler1Stenen)
+                {
+                    spelerGewonnen = 2;
+                }
+                else
+                {
+                    spelerGewonnen = 3;
+                    //Gelijkspel
+                }
+            }
+            
+            return spelerGewonnen;
+        }
+        
+        public bool CheckZetLegaal(Point klikVakje)
         {
             bool zetLegaal = false;
             // rijtje checks
-            bool duplicateLocatie = duplicateLocatieCheck(klikPunt);
+            bool duplicateLocatie = duplicateLocatieCheck(klikVakje);
             
             //
             if (duplicateLocatie)
