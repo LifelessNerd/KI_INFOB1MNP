@@ -224,6 +224,8 @@ namespace Reversi__Git_
                     raster[RasterX, RasterY] = 2;
                     speler1Zet = true;
                 }
+                //Moeten er dingen veranderen aan het speelveld op basis van de laatste zet? ja altijd btw
+                //veranderStenen(klikPunt);
                 speelveldPanel.Invalidate();
             } else {
                 Console.WriteLine("Zet mag niet!");
@@ -286,15 +288,17 @@ namespace Reversi__Git_
             return spelerGewonnen;
         }
         
-        public bool CheckZetLegaal(Point klikVakje)
+        public bool CheckZetLegaal(Point klikPunt)
         {
             bool zetLegaal = false;
             // rijtje checks
-            bool duplicateLocatie = duplicateLocatieCheck(klikVakje);
+            bool duplicateLocatieRegel = duplicateLocatieCheck(klikPunt);
+            bool sluitInRegel = checkInsluit(klikPunt);
+            //In elke methode opnieuw checken; boven onder, links rechts etc
 
-            
+
             //
-            if (duplicateLocatie)
+            if (duplicateLocatieRegel && sluitInRegel)
             {
                 zetLegaal = true;
             }
@@ -310,10 +314,48 @@ namespace Reversi__Git_
             }
             return zetLegaal;
         }
-        public void veranderStenen()
+        public bool checkInsluit(Point klikPunt)
         {
 
+            if (checkInsluitRichting(0, -1, klikPunt) || checkInsluitRichting(0, 1, klikPunt) || checkInsluitRichting(-1, 0, klikPunt) || checkInsluitRichting(1, 0, klikPunt) || 
+                checkInsluitRichting(1, 1, klikPunt) || checkInsluitRichting(-1, -1, klikPunt) || checkInsluitRichting(-1, 1, klikPunt))
+                // nested loop kan beter die van -1 tot 1 gaat in x en y
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        
+            //checkInsluitRichting(0, -1); //verticaal omhoog
+            //checkInsluitRichting(0, 1); //verticaal omlaag
+            //checkInsluitRichting(-1, 0); //horizontaal links
+            //checkInsluitRichting(1, 0); //horizontaal rechts
+            //checkInsluitRichting(1, 1); //diagonaalLBnaarRO
+            //checkInsluitRichting(-1, -1); //diagonaalROnaarLB
+            //checkInsluitRichting(-1, 1); //diagonaalRBnaarLO
+            //checkInsluitRichting(1, -1); //diagonaalLOnaarRB
+
+        }
+
+        private bool checkInsluitRichting(int dx, int dy, Point zetPunt)
+        {
+            while (true)
+            {
+                if (zetPunt.X >= 0 && zetPunt.X <= 6 && zetPunt.Y >= 0 && zetPunt.Y <= 6)
+                {
+                    bool zetPuntVanSpeler1 = speler1Zet;
+                    // miss een if statement van maken en dan ipv een bool een int
+                    Console.WriteLine(zetPunt + " is van speler 1: " + zetPuntVanSpeler1.ToString());
+                    Point checkPunt = new Point(zetPunt.X + dx, zetPunt.Y + dy);
+                    return true;
+
+                }
+            }
             
+
         }
     }
 }
