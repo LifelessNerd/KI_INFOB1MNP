@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Reversi__Git_
@@ -124,7 +125,7 @@ namespace Reversi__Git_
                     Console.WriteLine("Het is gelijkspel!");
                     break;
                 default:
-                    Console.WriteLine("Shit gaat fout");
+                    Console.WriteLine("Shit gaat fout????!");
                     break;
             }
 
@@ -226,10 +227,10 @@ namespace Reversi__Git_
                 speelveldPanel.Invalidate();
             } else {
                 Console.WriteLine("Zet mag niet!");
-                //SoundPlayer soundPlayer = new SoundPlayer(Reversi__Git_.Properties.Resources.errorSoundReversi);
-                //soundPlayer.Play();
-                DialogResult res = MessageBox.Show("Zet kan niet!", "Zet kan niet!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                // code met graphics zo van: kan niet idioot
+                SoundPlayer soundPlayer = new SoundPlayer(Reversi__Git_.Properties.Resources.errorSoundReversi);
+                soundPlayer.Play();
+                //DialogResult res = MessageBox.Show("Zet kan niet!", "Zet kan niet!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                // Dialogbox is vooral irritant, sound werkt beter
             }
             
         }
@@ -240,8 +241,9 @@ namespace Reversi__Git_
             int spelerGewonnen = 0;
             bool rasterCheck = false;
             bool nulGevonden = false;
+            int t = 0;
             //check of array helemaal gevuld is; anders is het spel nog bezig
-            while (!nulGevonden && t <= 38)
+            while (!nulGevonden && t < 40)
             {
                 for (int i = 0; i < maxElementen; i++)
                 {
@@ -253,9 +255,13 @@ namespace Reversi__Git_
                             spelerGewonnen = 0;
                             
                         }
+                        else
+                        {
+                            t++;
+                        }
                     } 
                 }
-            } //TODO: Dit is scuffed, komt in infi loop weet niet hoe te fixen
+            } // Dit is scuffed maar het werkt oke
 
 
             if (!nulGevonden)
@@ -263,10 +269,12 @@ namespace Reversi__Git_
                 if (speler1Stenen > speler2Stenen)
                 {
                     spelerGewonnen = 1;
+                    //Speler 1 heeft gewonnen
                 }
                 else if (speler2Stenen > speler1Stenen)
                 {
                     spelerGewonnen = 2;
+                    //Speler 2 heeft gewonnen
                 }
                 else
                 {
@@ -283,6 +291,7 @@ namespace Reversi__Git_
             bool zetLegaal = false;
             // rijtje checks
             bool duplicateLocatie = duplicateLocatieCheck(klikVakje);
+
             
             //
             if (duplicateLocatie)
@@ -300,6 +309,11 @@ namespace Reversi__Git_
                 zetLegaal = true;
             }
             return zetLegaal;
+        }
+        public void veranderStenen()
+        {
+
+            
         }
     }
 }
