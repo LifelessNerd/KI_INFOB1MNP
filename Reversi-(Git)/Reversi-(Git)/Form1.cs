@@ -342,20 +342,40 @@ namespace Reversi__Git_
 
         private bool checkInsluitRichting(int dx, int dy, Point zetPunt)
         {
-            while (true)
+            bool legaal = false;
+            int zetPuntVanSpeler;
+            bool running = true;
+            int teller = 0;
+
+            if (speler1Zet == true)
             {
-                if (zetPunt.X >= 0 && zetPunt.X <= 6 && zetPunt.Y >= 0 && zetPunt.Y <= 6)
-                {
-                    bool zetPuntVanSpeler1 = speler1Zet;
-                    // miss een if statement van maken en dan ipv een bool een int
-                    Console.WriteLine(zetPunt + " is van speler 1: " + zetPuntVanSpeler1.ToString());
-                    Point checkPunt = new Point(zetPunt.X + dx, zetPunt.Y + dy);
-                    return true;
-
-                }
+                zetPuntVanSpeler = 1;
             }
-            
+            else
+            {
+                zetPuntVanSpeler = 2;
+            }
 
+            Point checkPunt = new Point(zetPunt.X + dx, zetPunt.Y + dy);
+            while(running)
+            {
+
+                Console.WriteLine("checking " + checkPunt);
+                if(checkPunt.X < 0 || checkPunt.X > 5 || checkPunt.Y < 0 || checkPunt.Y > 5)
+                {
+                    //Out of bounds check
+                    Console.WriteLine(checkPunt + " out of bounds");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(checkPunt + " is NOT out of bounds, continuing checking" );
+                    checkPunt = new Point(checkPunt.X +dx,checkPunt.Y+dy);
+                }
+                
+            }
+
+            return legaal;
         }
     }
 }
