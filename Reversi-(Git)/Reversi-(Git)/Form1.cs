@@ -167,15 +167,15 @@ namespace Reversi__Git_
                     switch(raster[i,j])
                     {
                         case 0:
-                            Console.WriteLine("raster with " + i + "," + j + ": 0");
+                            //Console.WriteLine("raster with " + i + "," + j + ": 0");
                             break;
                         case 1:
-                            Console.WriteLine("raster with " + i + "," + j + ": 1");
+                            //Console.WriteLine("raster with " + i + "," + j + ": 1");
                             Rectangle speler1 = new Rectangle( 100 * i + 10 , 100 * j + 10, 100 - 20, 100 - 20);
                             g.FillEllipse(speler1Kleur, speler1);
                             break;
                         case 2:
-                            Console.WriteLine("raster with " + i + "," + j + ": 2");
+                            //Console.WriteLine("raster with " + i + "," + j + ": 2");
                             Rectangle speler2 = new Rectangle( 100 * i + 10 , 100 * j + 10, 100 - 20, 100 - 20);
                             g.FillEllipse(speler2Kleur, speler2);
                             break;
@@ -344,16 +344,20 @@ namespace Reversi__Git_
         {
             bool legaal = false;
             int zetPuntVanSpeler;
+            int zetPuntVanSpelerInvers;
             bool running = true;
-            int teller = 0;
+            bool andereSteenAanwezig = false;
+            
 
             if (speler1Zet == true)
             {
                 zetPuntVanSpeler = 1;
+                zetPuntVanSpelerInvers = 2;
             }
             else
             {
                 zetPuntVanSpeler = 2;
+                zetPuntVanSpelerInvers = 1;
             }
 
             Point checkPunt = new Point(zetPunt.X + dx, zetPunt.Y + dy);
@@ -369,9 +373,32 @@ namespace Reversi__Git_
                 }
                 else
                 {
-                    Console.WriteLine(checkPunt + " is NOT out of bounds, continuing checking" );
-                    checkPunt = new Point(checkPunt.X +dx,checkPunt.Y+dy);
+                    Console.WriteLine(checkPunt + " is NOT out of bounds, checking properties of point" );
+
+                    if (raster[checkPunt.X,checkPunt.Y] == zetPuntVanSpelerInvers)
+                    {
+                        andereSteenAanwezig = true;
+                        //Checkt voor een steen van andere team diue ingesloten moet worden
+                    }
+                    if (raster[checkPunt.X, checkPunt.Y] == 0)
+                    {
+                        break;
+                    }
+                    if (andereSteenAanwezig && raster[checkPunt.X, checkPunt.Y] == zetPuntVanSpeler)
+                    {
+                        //Checkt of de insluiting klaar is
+                        Console.WriteLine("Insluiting van " + zetPunt + " tot " + checkPunt);
+                        legaal = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Geen insluiting gevonden");
+                    }
+
+                    checkPunt = new Point(checkPunt.X + dx,checkPunt.Y + dy);
+
                 }
+                
                 
             }
 
