@@ -65,7 +65,7 @@
             this.RestartButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.RestartButton.Name = "RestartButton";
             this.RestartButton.Size = new System.Drawing.Size(32, 22);
-            this.RestartButton.ToolTipText = "Klik hier om een nieuw spel te starten.";
+            this.RestartButton.ToolTipText = "Klik hier om een nieuw spel te starten. Je oude spel wordt bewaard.";
             this.RestartButton.ButtonClick += new System.EventHandler(this.RestartButton_ButtonClick);
             // 
             // RestartText

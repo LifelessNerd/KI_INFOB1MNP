@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
-
+// Ewoud ter Wee, Luka de Vrij
 namespace Reversi__Git_
 {
     public partial class Form1 : Form
@@ -122,16 +122,12 @@ namespace Reversi__Git_
 
                     break;
                 case 1:
-
                     spelOver = true;
-
                     g.FillRectangle(UitslagKleur, 700, 10, 400, 100);
                     g.DrawString("SPELER 1\n HEEFT GEWONNEN", new Font("Cascadia Mono SemiBold", 28), Brushes.Red, scorePanel.Width / 2, scorePanel.Height / 2, UitslagFormat);
                     break;
                 case 2:
-
                     spelOver = true;
-
                     g.FillRectangle(UitslagKleur, 700, 10, 400, 100);
                     g.DrawString("SPELER 2\n HEEFT GEWONNEN", new Font("Cascadia Mono SemiBold", 28), Brushes.Red, scorePanel.Width / 2, scorePanel.Height / 2, UitslagFormat);
                     break;
