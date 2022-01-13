@@ -1,13 +1,3 @@
-C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\bin\Debug\Reversi-(Git).exe.config
-C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\bin\Debug\Reversi-(Git).exe
-C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\bin\Debug\Reversi-(Git).pdb
-C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\obj\Debug\Reversi-(Git).csproj.AssemblyReference.cache
-C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\obj\Debug\Reversi-(Git).csproj.SuggestedBindingRedirects.cache
-C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\obj\Debug\Reversi__Git_.Properties.Resources.resources
-C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\obj\Debug\Reversi-(Git).csproj.GenerateResource.cache
-C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\obj\Debug\Reversi-(Git).csproj.CoreCompileInputs.cache
-C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\obj\Debug\Reversi-(Git).exe
-C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\obj\Debug\Reversi-(Git).pdb
 C:\Users\ewoud\OneDrive\Documenten\Kunstmatige Intelligentie\Modelleren Progammeren\Luka's BS\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\obj\Debug\Reversi-(Git).csproj.AssemblyReference.cache
 C:\Users\ewoud\OneDrive\Documenten\Kunstmatige Intelligentie\Modelleren Progammeren\Luka's BS\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\obj\Debug\Reversi-(Git).csproj.SuggestedBindingRedirects.cache
 C:\Users\ewoud\OneDrive\Documenten\Kunstmatige Intelligentie\Modelleren Progammeren\Luka's BS\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\obj\Debug\Reversi__Git_.Properties.Resources.resources
@@ -18,4 +8,3 @@ C:\Users\ewoud\OneDrive\Documenten\Kunstmatige Intelligentie\Modelleren Progamme
 C:\Users\ewoud\OneDrive\Documenten\Kunstmatige Intelligentie\Modelleren Progammeren\Luka's BS\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\bin\Debug\Reversi-(Git).exe.config
 C:\Users\ewoud\OneDrive\Documenten\Kunstmatige Intelligentie\Modelleren Progammeren\Luka's BS\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\bin\Debug\Reversi-(Git).exe
 C:\Users\ewoud\OneDrive\Documenten\Kunstmatige Intelligentie\Modelleren Progammeren\Luka's BS\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\bin\Debug\Reversi-(Git).pdb
-C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\obj\Debug\Reversi__Git_.Form1.resources
