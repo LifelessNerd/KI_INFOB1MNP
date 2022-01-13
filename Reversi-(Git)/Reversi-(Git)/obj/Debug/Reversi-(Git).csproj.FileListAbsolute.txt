@@ -18,3 +18,4 @@ C:\Users\ewoud\OneDrive\Documenten\Kunstmatige Intelligentie\Modelleren Progamme
 C:\Users\ewoud\OneDrive\Documenten\Kunstmatige Intelligentie\Modelleren Progammeren\Luka's BS\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\bin\Debug\Reversi-(Git).exe.config
 C:\Users\ewoud\OneDrive\Documenten\Kunstmatige Intelligentie\Modelleren Progammeren\Luka's BS\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\bin\Debug\Reversi-(Git).exe
 C:\Users\ewoud\OneDrive\Documenten\Kunstmatige Intelligentie\Modelleren Progammeren\Luka's BS\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\bin\Debug\Reversi-(Git).pdb
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Reversi-(Git)\Reversi-(Git)\obj\Debug\Reversi__Git_.Form1.resources

@@ -8,26 +8,30 @@ namespace Reversi__Git_
 {
     public partial class Form1 : Form
     {
-        int maxElementen = 6;
-        int[,] raster; 
+        int maxElementen;
+        int[,] raster;
         bool speler1Zet = true;
         Panel speelveldPanel = new Panel();
         Panel scorePanel = new Panel();
         int speler1Stenen = 0;
         int speler2Stenen = 0;
-        bool spelVast = false;
         bool veranderingToegestaan = true;
+        int zetSkipsStreak;
+        bool eindeOverschreven;
+        bool spelOver;
+
 
         //Kleuren
         SolidBrush speler1Kleur = new SolidBrush(Color.FromArgb(77, 69, 68));
         SolidBrush speler2Kleur = new SolidBrush(Color.FromArgb(212, 191, 188));
 
         public Form1()
-        {
-           
-            InitializeComponent();   
+        { 
+            InitializeComponent();
             //Speelveld 
-            this.Size = new Size(800, 800);
+            ZetMaxElementen(6);
+            
+            this.Text = "Reversi";
             this.Controls.Add(speelveldPanel);
             speelveldPanel.Paint += this.TekenPionnen;
             speelveldPanel.Paint += this.Tekenen;
@@ -35,17 +39,19 @@ namespace Reversi__Git_
 
             speelveldPanel.Size = new Size(maxElementen * 100, maxElementen * 100);
             speelveldPanel.BackColor = Color.Gray;
+            speelveldPanel.Location = new Point(0, 30);
 
             int rowWidth = speelveldPanel.Width / maxElementen;
             int rowHeight = speelveldPanel.Height / maxElementen;
 
             //Scorepanel 
             scorePanel.Size = new Size(maxElementen * 100, 100);
-            scorePanel.Location = new Point(0, (maxElementen * 100) + 10);
+            scorePanel.Location = new Point(0, (maxElementen * 100) + 40);
             scorePanel.BackColor = Color.FromArgb(60, 19, 50, 80);
             scorePanel.Paint += this.TekenScorepanel;
             this.Controls.Add(scorePanel);
             //Array raster
+            
             raster = new int[maxElementen, maxElementen];
 
             //Begin van speelveld met 2 stenen voor elk team
@@ -53,31 +59,20 @@ namespace Reversi__Git_
             raster[3, 3] = 1;
             raster[3, 2] = 2;
             raster[2, 3] = 2;
-            /*/Print mechanisme
-            for (int i = 0; i < raster.GetLength(0); i++)
-            {
-                for (int j = 0; j < raster.GetLength(1); j++)
-                {
-                    Console.Write(raster[i, j].ToString() + " ");
-                }
-                Console.WriteLine("");
-            }
-            /*/
-            //Menu
-            
-            //ToolStripMenuItem menu = new ToolStripMenuItem("Opties");
-            //menu.DropDownItems.Add("Herstart", null, this.Herstart);
-            
+
+            bool spelOver = false;
+
 
             speelveldPanel.Invalidate();
             scorePanel.Invalidate();
             
         }
 
-        private void Herstart(object sender, EventArgs e)
+        private void ZetMaxElementen(int maxElem)
         {
-            Console.WriteLine("Restart");
-            // zet alle items in 2d array naar 0
+            raster = new int[maxElem, maxElem];
+            maxElementen = maxElem;
+            this.Size = new Size(800,800);
         }
 
         public void TekenScorepanel(object sender, PaintEventArgs pea)
@@ -86,7 +81,7 @@ namespace Reversi__Git_
             //Scorebord met score voor beide teams
             speler1Stenen = 0;
             speler2Stenen = 0;
-            bool spelOver = false;
+            
 
 
             Graphics g = pea.Graphics;
@@ -119,6 +114,7 @@ namespace Reversi__Git_
             UitslagFormat.Alignment = StringAlignment.Center;
             UitslagFormat.LineAlignment = StringAlignment.Center;
             SolidBrush UitslagKleur = new SolidBrush(Color.FromArgb(60, 19, 50, 80));
+
             switch (CheckSpelGewonnen())
             {
                 case 0:
@@ -127,20 +123,19 @@ namespace Reversi__Git_
                 case 1:
                     Console.WriteLine("Speler 1 heeft gewonnen!");
                     spelOver = true;
-                    Console.WriteLine("Het is gelijkspel!");
+
                     g.FillRectangle(UitslagKleur, 700, 10, 400, 100);
                     g.DrawString("SPELER 1\n HEEFT GEWONNEN", new Font("Cascadia Mono SemiBold", 28), Brushes.Black, scorePanel.Width / 2, scorePanel.Height / 2, UitslagFormat);
                     break;
                 case 2:
                     Console.WriteLine("Speler 2 heeft gewonnen!");
                     spelOver = true;
-                    Console.WriteLine("Het is gelijkspel!");
+
                     g.FillRectangle(UitslagKleur, 700, 10, 400, 100);
                     g.DrawString("SPELER 2\n HEEFT GEWONNEN", new Font("Cascadia Mono SemiBold", 28), Brushes.Black, scorePanel.Width / 2, scorePanel.Height / 2, UitslagFormat);
                     break;
                 case 3:
                     spelOver = true;
-                    Console.WriteLine("Het is gelijkspel!");
                     g.FillRectangle(UitslagKleur, 700, 10, 400, 100);
                     g.DrawString("HET IS GELIJKSPEL", new Font("Cascadia Mono SemiBold", 28), Brushes.Black, scorePanel.Width / 2, scorePanel.Height / 2, UitslagFormat);
                     break;
@@ -235,19 +230,21 @@ namespace Reversi__Git_
             int RasterY = KlikY / 100;
             Point klikPunt = new Point(RasterX, RasterY);
 
-            if (CheckZetLegaal(klikPunt))
+            if (CheckZetLegaal(klikPunt) && !spelOver)
             {
 
                 if (speler1Zet)
                 {
                     raster[RasterX, RasterY] = 1;
                     speler1Zet = false;
+                    zetSkipsStreak = 0;
                     
                 }
                 else
                 {
                     raster[RasterX, RasterY] = 2;
                     speler1Zet = true;
+                    zetSkipsStreak = 0;
                     
                 }
                 
@@ -269,7 +266,7 @@ namespace Reversi__Git_
             int t = 0;
 
             //check of array helemaal gevuld is; anders is het spel nog bezig
-            while (!nulGevonden && t < maxElementen * 10)
+            while ((!nulGevonden && t < maxElementen * 10))
             {
                 for (int i = 0; i < maxElementen; i++)
                 {
@@ -297,7 +294,7 @@ namespace Reversi__Git_
         private int checkStenen(bool nulGevonden)
         {
             int spelerGewonnen = 0;
-            if (!nulGevonden)
+            if (!nulGevonden || eindeOverschreven)
             {
                 if (speler1Stenen > speler2Stenen)
                 {
@@ -322,7 +319,6 @@ namespace Reversi__Git_
         public bool CheckZetLegaal(Point klikPunt)
         {
             bool zetLegaal = false;
-            int t = 0;
             // rijtje checks
             bool duplicateLocatieRegel = duplicateLocatieCheck(klikPunt);
             bool sluitInRegel = checkInsluit(klikPunt);
@@ -332,120 +328,7 @@ namespace Reversi__Git_
                 zetLegaal = true;
             }
             
-            // Check die kijkt of er nog opties zijn voor speler die aan zet komt
-            if (!duplicateLocatieRegel && !sluitInRegel)
-            {
-                /*/Console.WriteLine("Geen zetten meer te doen! AAAAAAAAAAAAAA\n\n\n\n\n\n\n");
-                if (speler1Zet)
-                {
-                    vasteSpeler = 2;
-                    spelVast = true;
-                    DialogResult res = MessageBox.Show("Let op", "Er zijn geen zetten meer voor speler 2. Speler 1 is nu direct aan de beurt.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    vasteSpeler = 1;
-                    spelVast = true;
-                    DialogResult res = MessageBox.Show("Let op", "Er zijn geen zetten meer voor speler 1. Speler 2 is nu direct aan de beurt.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                }/*/
-
-            } //bs waarschijnlijk
-
-            //check of array nog lege plekken heeft; checkt vervolgens deze plekken of ze legaal zijn
-            /*/for (int i = 0; i < maxElementen; i++)
-            {
-                for (int j = 0; j < maxElementen; j++)
-                {
-                    if (raster[i, j] == 0)
-                    {
-                        CheckVastSpel(new Point(i,j));
-                        //Toch maar even nieuwe functie aangezien de andere 1. dingen veranderd 2.de main steen niet meeneemt, deze moet juist ghecheckt worden
-                    }
-                }
-            }
-            /*/
-            
             return zetLegaal;
-        }
-
-        public bool CheckVastSpel(Point klikPunt)
-        {
-            if (checkInsluitRichting(0, -1, klikPunt) | checkInsluitRichting(0, 1, klikPunt) | checkInsluitRichting(-1, 0, klikPunt) | checkInsluitRichting(1, 0, klikPunt) |
-                checkInsluitRichting(1, 1, klikPunt) | checkInsluitRichting(-1, -1, klikPunt) | checkInsluitRichting(-1, 1, klikPunt) | checkInsluitRichting(1, -1, klikPunt))
-            // nested loop is beter die van -1 tot 1 gaat in x en y
-            {
-                return true;
-
-            }
-            else
-            {
-                return false;
-            }
-        }
-        //Toch maar even nieuwe functie aangezien de andere 1. dingen veranderd 2.de main steen niet meeneemt, deze moet juist ghecheckt worden
-        public bool CheckVastSpelInsluiting(int dx, int dy, Point klikPunt)
-        {
-            int zetPuntVanSpeler;
-            int zetPuntVanSpelerInvers;
-            bool andereSteenAanwezig = false;
-            bool legaal = false;
-
-            if (speler1Zet == true)
-            {
-                zetPuntVanSpeler = 2;
-                zetPuntVanSpelerInvers = 1;
-            }
-            else
-            {
-                zetPuntVanSpeler = 1;
-                zetPuntVanSpelerInvers = 2;
-            }
-            
-            Point checkPunt = klikPunt;
-            while (true)
-            {
-                
-                if (checkPunt.X < 0 || checkPunt.X > 5 || checkPunt.Y < 0 || checkPunt.Y > 5)
-                {
-                    //Out of bounds check
-                    Console.WriteLine("Out of bounds");
-
-                    break;
-                } //Out of bounds check
-                else
-                {
-                    Console.WriteLine("NOT out of bounds");
-                    if (raster[checkPunt.X, checkPunt.Y] == zetPuntVanSpelerInvers)
-                    {
-                        andereSteenAanwezig = true;
-
-                        //Checkt voor een steen van andere team die ingesloten moet worden
-                    }
-                    if (raster[checkPunt.X, checkPunt.Y] == zetPuntVanSpeler && !andereSteenAanwezig)
-                    {
-                        //Er wordt wel ingesloten maar er is geen steen tussen van het andere team
-                        break;
-                    }
-                    if (andereSteenAanwezig && raster[checkPunt.X, checkPunt.Y] == zetPuntVanSpeler)
-                    {
-                        //Checkt of de insluiting klaar is
-                        Console.WriteLine("Insluiting van " + klikPunt + " tot " + checkPunt);
-
-                        legaal = true;
-                        break;
-                    }
-                    else
-                    {
-
-                    }
-
-                    checkPunt = new Point(checkPunt.X + dx, checkPunt.Y + dy);
-
-                }
-
-            }
-            return legaal;
         }
 
         public bool duplicateLocatieCheck(Point klikPunt)
@@ -490,7 +373,7 @@ namespace Reversi__Git_
             int zetPuntVanSpelerInvers;
             bool running = true;
             bool andereSteenAanwezig = false;
-            
+
 
             if (speler1Zet == true)
             {
@@ -508,22 +391,22 @@ namespace Reversi__Git_
 
             while (running)
             {
-                
-                
+
+
                 Console.WriteLine("checking " + checkPunt);
-                
-                if(checkPunt.X < 0 || checkPunt.X > 5 || checkPunt.Y < 0 || checkPunt.Y > 5)
+
+                if (checkPunt.X < 0 || checkPunt.X > 5 || checkPunt.Y < 0 || checkPunt.Y > 5)
                 {
                     //Out of bounds check
                     Console.WriteLine("Out of bounds");
                     running = false;
-                    
+
                     break;
                 } //Out of bounds check
                 else
                 {
                     Console.WriteLine("NOT out of bounds");
-                    if (raster[checkPunt.X,checkPunt.Y] == zetPuntVanSpelerInvers)
+                    if (raster[checkPunt.X, checkPunt.Y] == zetPuntVanSpelerInvers)
                     {
                         andereSteenAanwezig = true;
                         checkList.Add(checkPunt);
@@ -532,12 +415,12 @@ namespace Reversi__Git_
                     }
                     if (raster[checkPunt.X, checkPunt.Y] == 0 && veranderingToegestaan == false)
                     {
-                        
+
                         break;
                     }
                     if (raster[checkPunt.X, checkPunt.Y] == zetPuntVanSpeler && !andereSteenAanwezig)
                     {
-                        Console.WriteLine("dab");
+                        
                         break;
                     }
                     if (andereSteenAanwezig && raster[checkPunt.X, checkPunt.Y] == zetPuntVanSpeler)
@@ -547,28 +430,67 @@ namespace Reversi__Git_
                         checkList.Add(checkPunt);
                         foreach (Point checkPoint in checkList)
                         {
-                            if (veranderingToegestaan) 
-                            { 
-                                raster[checkPoint.X, checkPoint.Y] = zetPuntVanSpeler; 
+                            if (veranderingToegestaan)
+                            {
+                                raster[checkPoint.X, checkPoint.Y] = zetPuntVanSpeler;
                             }
                         }
-                        
+
                         legaal = true;
                         break;
                     }
                     else
                     {
-                        
+
                     }
 
-                    checkPunt = new Point(checkPunt.X + dx,checkPunt.Y + dy);
+                    checkPunt = new Point(checkPunt.X + dx, checkPunt.Y + dy);
 
                 }
-                
-                
+
+
             }
 
             return legaal;
+        }
+
+        private void RestartButton_ButtonClick(object sender, EventArgs e)
+        {
+            ZetMaxElementen(8);
+            Form nieuwSpel = new Form1();
+            Form oudSpel = this;
+            this.Hide();
+            nieuwSpel.ShowDialog();
+            this.Show();
+        }
+
+        private void GeenZettenButton_Click(object sender, EventArgs e)
+        {
+            if (speler1Zet)
+            {
+                speler1Zet = false;
+            }
+            else
+            {
+                speler1Zet = true;
+            }
+            this.Invalidate();
+            DialogResult res = MessageBox.Show("Aangezien je geen zetten meer kan doen, gaat de beurt naar de andere speler.", "Reversi - Geen zetten meer...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            zetSkipsStreak++;
+            if (zetSkipsStreak >= 2)
+            {
+                Console.WriteLine("Beide teams kunnen niets meer, initiate stenentel");
+                eindeOverschreven = true;
+                DialogResult res2 = MessageBox.Show("Aangezien beide teams geen zetten meer kunnen doen is het spel beëindigd.", "Reversi - Geen zetten meer...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Invalidate();
+            }
+        }
+
+        private void HulpButton_Click(object sender, EventArgs e)
+        {
+            String hulpText = "Reversi heeft twee teams, zwart en wit. Elk beschikken ze over stenen. Zwart begint. In de beginpositie zijn de vier velden in het centrum bezet. Een zet bestaat uit het neerleggen van een steen, op een leeg vakje. Alle stenen of series van stenen van de kleur van de tegenstander die tussen deze steen en een steen van de eigen kleur liggen(horizontaal, verticaal of schuin), worden omgedraaid van kleur. Men mag alleen een steen neerleggen indien daardoor minstens één steen wordt omgedraaid.Kan men dat niet, dan slaat men een beurt over.Kan men wel een zet doen, dan is dat verplicht. Het spel is voorbij als er geen stenen meer neergelegd kunnen worden, meestal doordat het bord vol is. De winnaar is de speler die de meeste stenen van zijn of haar kleur op het bord heeft. (nl.wikipedia.org/wiki/Reversi)";
+            DialogResult res = MessageBox.Show(hulpText, "Hulp", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
         }
     }
 }
