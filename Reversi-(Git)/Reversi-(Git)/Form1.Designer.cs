@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.RestartButton = new System.Windows.Forms.ToolStripSplitButton();
             this.RestartText = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.GeenZettenButton = new System.Windows.Forms.ToolStripButton();
@@ -37,10 +38,6 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.HulpButton = new System.Windows.Forms.ToolStripButton();
             this.HulpText = new System.Windows.Forms.ToolStripLabel();
-            this.RestartButton = new System.Windows.Forms.ToolStripSplitButton();
-            this.x6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +57,16 @@
             this.toolStrip2.Size = new System.Drawing.Size(696, 25);
             this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
+            // 
+            // RestartButton
+            // 
+            this.RestartButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.RestartButton.Image = ((System.Drawing.Image)(resources.GetObject("RestartButton.Image")));
+            this.RestartButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.RestartButton.Name = "RestartButton";
+            this.RestartButton.Size = new System.Drawing.Size(32, 22);
+            this.RestartButton.ToolTipText = "Klik hier om een nieuw spel te starten.";
+            this.RestartButton.ButtonClick += new System.EventHandler(this.RestartButton_ButtonClick);
             // 
             // RestartText
             // 
@@ -110,39 +117,6 @@
             this.HulpText.Size = new System.Drawing.Size(33, 22);
             this.HulpText.Text = "Hulp";
             // 
-            // RestartButton
-            // 
-            this.RestartButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.RestartButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.x6ToolStripMenuItem,
-            this.x8ToolStripMenuItem,
-            this.x4ToolStripMenuItem});
-            this.RestartButton.Image = ((System.Drawing.Image)(resources.GetObject("RestartButton.Image")));
-            this.RestartButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.RestartButton.Name = "RestartButton";
-            this.RestartButton.Size = new System.Drawing.Size(32, 22);
-            this.RestartButton.ToolTipText = "Klik hier om een nieuw spel te starten. Je kunt gebruik maken van meerdere opties" +
-    ".";
-            this.RestartButton.ButtonClick += new System.EventHandler(this.RestartButton_ButtonClick);
-            // 
-            // x6ToolStripMenuItem
-            // 
-            this.x6ToolStripMenuItem.Name = "x6ToolStripMenuItem";
-            this.x6ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.x6ToolStripMenuItem.Text = "6x6";
-            // 
-            // x8ToolStripMenuItem
-            // 
-            this.x8ToolStripMenuItem.Name = "x8ToolStripMenuItem";
-            this.x8ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.x8ToolStripMenuItem.Text = "8x8";
-            // 
-            // x4ToolStripMenuItem
-            // 
-            this.x4ToolStripMenuItem.Name = "x4ToolStripMenuItem";
-            this.x4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.x4ToolStripMenuItem.Text = "4x4";
-            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(696, 565);
@@ -167,9 +141,6 @@
         private System.Windows.Forms.ToolStripButton HulpButton;
         private System.Windows.Forms.ToolStripLabel HulpText;
         private System.Windows.Forms.ToolStripSplitButton RestartButton;
-        private System.Windows.Forms.ToolStripMenuItem x6ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem x8ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem x4ToolStripMenuItem;
     }
 }
 

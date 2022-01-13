@@ -19,7 +19,7 @@ namespace Reversi__Git_
         int zetSkipsStreak;
         bool eindeOverschreven;
         bool spelOver;
-
+        bool alGeopend = false;
 
         //Kleuren
         SolidBrush speler1Kleur = new SolidBrush(Color.FromArgb(77, 69, 68));
@@ -28,9 +28,18 @@ namespace Reversi__Git_
         public Form1()
         { 
             InitializeComponent();
-            //Speelveld 
-            ZetMaxElementen(6);
             
+            nieuwSpel();
+            
+        }
+
+        private void nieuwSpel()
+        {
+            //Speelveld
+            maxElementen = 6;
+            raster = new int[maxElementen, maxElementen];
+            this.Size = new Size(800, 800);
+
             this.Text = "Reversi";
             this.Controls.Add(speelveldPanel);
             speelveldPanel.Paint += this.TekenPionnen;
@@ -51,7 +60,7 @@ namespace Reversi__Git_
             scorePanel.Paint += this.TekenScorepanel;
             this.Controls.Add(scorePanel);
             //Array raster
-            
+
             raster = new int[maxElementen, maxElementen];
 
             //Begin van speelveld met 2 stenen voor elk team
@@ -65,14 +74,6 @@ namespace Reversi__Git_
 
             speelveldPanel.Invalidate();
             scorePanel.Invalidate();
-            
-        }
-
-        private void ZetMaxElementen(int maxElem)
-        {
-            raster = new int[maxElem, maxElem];
-            maxElementen = maxElem;
-            this.Size = new Size(800,800);
         }
 
         public void TekenScorepanel(object sender, PaintEventArgs pea)
@@ -118,29 +119,29 @@ namespace Reversi__Git_
             switch (CheckSpelGewonnen())
             {
                 case 0:
-                    Console.WriteLine("Spel is nog bezig: geen winnaar");
+
                     break;
                 case 1:
-                    Console.WriteLine("Speler 1 heeft gewonnen!");
+
                     spelOver = true;
 
                     g.FillRectangle(UitslagKleur, 700, 10, 400, 100);
-                    g.DrawString("SPELER 1\n HEEFT GEWONNEN", new Font("Cascadia Mono SemiBold", 28), Brushes.Black, scorePanel.Width / 2, scorePanel.Height / 2, UitslagFormat);
+                    g.DrawString("SPELER 1\n HEEFT GEWONNEN", new Font("Cascadia Mono SemiBold", 28), Brushes.Red, scorePanel.Width / 2, scorePanel.Height / 2, UitslagFormat);
                     break;
                 case 2:
-                    Console.WriteLine("Speler 2 heeft gewonnen!");
+
                     spelOver = true;
 
                     g.FillRectangle(UitslagKleur, 700, 10, 400, 100);
-                    g.DrawString("SPELER 2\n HEEFT GEWONNEN", new Font("Cascadia Mono SemiBold", 28), Brushes.Black, scorePanel.Width / 2, scorePanel.Height / 2, UitslagFormat);
+                    g.DrawString("SPELER 2\n HEEFT GEWONNEN", new Font("Cascadia Mono SemiBold", 28), Brushes.Red, scorePanel.Width / 2, scorePanel.Height / 2, UitslagFormat);
                     break;
                 case 3:
                     spelOver = true;
                     g.FillRectangle(UitslagKleur, 700, 10, 400, 100);
-                    g.DrawString("HET IS GELIJKSPEL", new Font("Cascadia Mono SemiBold", 28), Brushes.Black, scorePanel.Width / 2, scorePanel.Height / 2, UitslagFormat);
+                    g.DrawString("HET IS GELIJKSPEL", new Font("Cascadia Mono SemiBold", 28), Brushes.Red, scorePanel.Width / 2, scorePanel.Height / 2, UitslagFormat);
                     break;
                 default:
-                    Console.WriteLine("Shit gaat fout????!");
+
                     break;
             }
 
@@ -178,7 +179,7 @@ namespace Reversi__Git_
         {
             //Waarde van array = 0; leeg. = 1 van sp1 = 2 van sp2.
             Graphics g = pea.Graphics;
-            Console.WriteLine("\n");
+
             for (int i = 0; i < maxElementen; i++)
             {
                 for (int j = 0; j < maxElementen; j++) 
@@ -186,15 +187,15 @@ namespace Reversi__Git_
                     switch(raster[i,j])
                     {
                         case 0:
-                            //Console.WriteLine("raster with " + i + "," + j + ": 0");
+
                             break;
                         case 1:
-                            //Console.WriteLine("raster with " + i + "," + j + ": 1");
+
                             Rectangle speler1 = new Rectangle( 100 * i + 10 , 100 * j + 10, 100 - 20, 100 - 20);
                             g.FillEllipse(speler1Kleur, speler1);
                             break;
                         case 2:
-                            //Console.WriteLine("raster with " + i + "," + j + ": 2");
+
                             Rectangle speler2 = new Rectangle( 100 * i + 10 , 100 * j + 10, 100 - 20, 100 - 20);
                             g.FillEllipse(speler2Kleur, speler2);
                             break;
@@ -250,7 +251,7 @@ namespace Reversi__Git_
                 
                 speelveldPanel.Invalidate();
             } else {
-                Console.WriteLine("Zet mag niet!");
+
                 SoundPlayer soundPlayer = new SoundPlayer(Reversi__Git_.Properties.Resources.errorSoundReversi);
                 soundPlayer.Play();
                 //DialogResult res = MessageBox.Show("Zet kan niet!", "Zet kan niet!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -393,19 +394,19 @@ namespace Reversi__Git_
             {
 
 
-                Console.WriteLine("checking " + checkPunt);
+
 
                 if (checkPunt.X < 0 || checkPunt.X > 5 || checkPunt.Y < 0 || checkPunt.Y > 5)
                 {
                     //Out of bounds check
-                    Console.WriteLine("Out of bounds");
+
                     running = false;
 
                     break;
                 } //Out of bounds check
                 else
                 {
-                    Console.WriteLine("NOT out of bounds");
+
                     if (raster[checkPunt.X, checkPunt.Y] == zetPuntVanSpelerInvers)
                     {
                         andereSteenAanwezig = true;
@@ -426,7 +427,7 @@ namespace Reversi__Git_
                     if (andereSteenAanwezig && raster[checkPunt.X, checkPunt.Y] == zetPuntVanSpeler)
                     {
                         //Checkt of de insluiting klaar is
-                        Console.WriteLine("Insluiting van " + zetPunt + " tot " + checkPunt);
+
                         checkList.Add(checkPunt);
                         foreach (Point checkPoint in checkList)
                         {
@@ -456,16 +457,27 @@ namespace Reversi__Git_
 
         private void RestartButton_ButtonClick(object sender, EventArgs e)
         {
-            ZetMaxElementen(8);
-            Form nieuwSpel = new Form1();
-            Form oudSpel = this;
-            this.Hide();
-            nieuwSpel.ShowDialog();
-            this.Show();
+            //Zorgt er voor dat er max 1 is
+            if (alGeopend == false)
+            {
+                alGeopend = true;
+
+                Form nieuwSpel = new Form1();
+                nieuwSpel.Text = "Reversi [Nieuw spel]";
+                Form oudSpel = this;
+
+                this.Hide();
+                nieuwSpel.ShowDialog();
+
+                alGeopend = false;
+                this.Show();
+            }
+            
         }
 
         private void GeenZettenButton_Click(object sender, EventArgs e)
         {
+            //Beurt veranderen
             if (speler1Zet)
             {
                 speler1Zet = false;
@@ -477,9 +489,10 @@ namespace Reversi__Git_
             this.Invalidate();
             DialogResult res = MessageBox.Show("Aangezien je geen zetten meer kan doen, gaat de beurt naar de andere speler.", "Reversi - Geen zetten meer...", MessageBoxButtons.OK, MessageBoxIcon.Information);
             zetSkipsStreak++;
+            //Als 2x  achter elkaar dan ligt het spel plat
             if (zetSkipsStreak >= 2)
             {
-                Console.WriteLine("Beide teams kunnen niets meer, initiate stenentel");
+
                 eindeOverschreven = true;
                 DialogResult res2 = MessageBox.Show("Aangezien beide teams geen zetten meer kunnen doen is het spel beëindigd.", "Reversi - Geen zetten meer...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Invalidate();
