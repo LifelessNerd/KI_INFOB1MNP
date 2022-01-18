@@ -152,7 +152,7 @@ namespace SchetsEditor
             
             Button b; Label l; ComboBox cbb;
             b = new Button(); 
-            b.Text = "Clear";  
+            b.Text = "Clear";   
             b.Location = new Point(  0, 0); 
             b.Click += schetscontrol.Schoon; 
             paneel.Controls.Add(b);

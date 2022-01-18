@@ -1,0 +1,8 @@
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\SchetsEditor Prac3\SchetsEditor\bin\Debug\SchetsEditor.exe
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\SchetsEditor Prac3\SchetsEditor\bin\Debug\SchetsEditor.pdb
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\SchetsEditor Prac3\SchetsEditor\obj\Debug\SchetsEditor2008.csproj.AssemblyReference.cache
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\SchetsEditor Prac3\SchetsEditor\obj\Debug\SchetsEditor.Properties.Resources.resources
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\SchetsEditor Prac3\SchetsEditor\obj\Debug\SchetsEditor2008.csproj.GenerateResource.cache
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\SchetsEditor Prac3\SchetsEditor\obj\Debug\SchetsEditor2008.csproj.CoreCompileInputs.cache
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\SchetsEditor Prac3\SchetsEditor\obj\Debug\SchetsEditor.exe
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\SchetsEditor Prac3\SchetsEditor\obj\Debug\SchetsEditor.pdb
