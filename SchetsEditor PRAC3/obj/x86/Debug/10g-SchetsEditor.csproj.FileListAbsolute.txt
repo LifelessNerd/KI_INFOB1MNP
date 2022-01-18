@@ -1,0 +1,10 @@
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\SchetsEditor PRAC3\bin\Debug\Schets.exe.config
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\SchetsEditor PRAC3\bin\Debug\Schets.exe
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\SchetsEditor PRAC3\bin\Debug\Schets.pdb
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\SchetsEditor PRAC3\obj\x86\Debug\10g-SchetsEditor.csproj.AssemblyReference.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\SchetsEditor PRAC3\obj\x86\Debug\10g-SchetsEditor.csproj.SuggestedBindingRedirects.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\SchetsEditor PRAC3\obj\x86\Debug\SchetsEditor.Properties.Resources.resources
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\SchetsEditor PRAC3\obj\x86\Debug\10g-SchetsEditor.csproj.GenerateResource.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\SchetsEditor PRAC3\obj\x86\Debug\10g-SchetsEditor.csproj.CoreCompileInputs.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\SchetsEditor PRAC3\obj\x86\Debug\Schets.exe
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\SchetsEditor PRAC3\obj\x86\Debug\Schets.pdb
