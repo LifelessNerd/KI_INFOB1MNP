@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -10,15 +11,19 @@ namespace SchetsEditor
         void MuisDrag(SchetsControl s, Point p);
         void MuisLos(SchetsControl s, Point p);
         void Letter(SchetsControl s, char c);
-    }
 
+
+    }
     public abstract class StartpuntTool : ISchetsTool
     {
         protected Point startpunt;
         protected Brush kwast;
 
+        
+
         public virtual void MuisVast(SchetsControl s, Point p)
-        {   startpunt = p;
+        {   
+            startpunt = p;
         }
         public virtual void MuisLos(SchetsControl s, Point p)
         {   kwast = new SolidBrush(s.PenKleur);
@@ -57,6 +62,7 @@ namespace SchetsEditor
         {   return new Rectangle( new Point(Math.Min(p1.X,p2.X), Math.Min(p1.Y,p2.Y))
                                 , new Size (Math.Abs(p1.X-p2.X), Math.Abs(p1.Y-p2.Y))
                                 );
+
         }
         public static Pen MaakPen(Brush b, int dikte)
         {   Pen pen = new Pen(b, dikte);
@@ -94,6 +100,7 @@ namespace SchetsEditor
         public override void Bezig(Graphics g, Point p1, Point p2)
         {   g.DrawRectangle(MaakPen(kwast,3), TweepuntTool.Punten2Rechthoek(p1, p2));
         }
+        
     }
     
     public class VolRechthoekTool : RechthoekTool
@@ -103,6 +110,7 @@ namespace SchetsEditor
         public override void Compleet(Graphics g, Point p1, Point p2)
         {   g.FillRectangle(kwast, TweepuntTool.Punten2Rechthoek(p1, p2));
         }
+        
     }
 
     public class LijnTool : TweepuntTool

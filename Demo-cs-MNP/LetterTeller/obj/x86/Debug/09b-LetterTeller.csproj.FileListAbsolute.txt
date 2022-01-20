@@ -1,0 +1,12 @@
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\LetterTeller\bin\Debug\LetterTeller.exe.config
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\LetterTeller\bin\Debug\LetterTeller.exe
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\LetterTeller\bin\Debug\LetterTeller.pdb
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\LetterTeller\bin\Debug\CirkelKlikker.exe
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\LetterTeller\bin\Debug\CirkelKlikker.pdb
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\LetterTeller\bin\Debug\CirkelKlikker.exe.config
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\LetterTeller\obj\x86\Debug\09b-LetterTeller.csproj.AssemblyReference.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\LetterTeller\obj\x86\Debug\09b-LetterTeller.csproj.SuggestedBindingRedirects.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\LetterTeller\obj\x86\Debug\09b-LetterTeller.csproj.CoreCompileInputs.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\LetterTeller\obj\x86\Debug\09b-LetterTeller.csproj.CopyComplete
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\LetterTeller\obj\x86\Debug\LetterTeller.exe
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\LetterTeller\obj\x86\Debug\LetterTeller.pdb

@@ -7,7 +7,7 @@ namespace SchetsEditor
     public class Schets
     {
         private Bitmap bitmap;
-        
+        public List<Rectangle> getekendeVierkanten = new List<Rectangle>();
         public Schets()
         {
             bitmap = new Bitmap(1, 1);

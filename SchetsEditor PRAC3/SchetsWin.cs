@@ -14,6 +14,7 @@ namespace SchetsEditor
         ISchetsTool huidigeTool;
         Panel paneel;
         bool vast;
+        
         ResourceManager resourcemanager
             = new ResourceManager("SchetsEditor.Properties.Resources"
                                  , Assembly.GetExecutingAssembly()
@@ -76,6 +77,8 @@ namespace SchetsEditor
                                        {   huidigeTool.Letter  (schetscontrol, kpea.KeyChar); 
                                        };
             this.Controls.Add(schetscontrol);
+
+
 
             menuStrip = new MenuStrip();
             menuStrip.Visible = false;

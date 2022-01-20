@@ -1,0 +1,8 @@
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\CirkelKlikker\bin\Debug\CirkelKlikker.exe.config
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\CirkelKlikker\bin\Debug\CirkelKlikker.exe
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\CirkelKlikker\bin\Debug\CirkelKlikker.pdb
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\CirkelKlikker\obj\x86\Debug\09a-CirkelKlikker.csproj.AssemblyReference.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\CirkelKlikker\obj\x86\Debug\09a-CirkelKlikker.csproj.SuggestedBindingRedirects.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\CirkelKlikker\obj\x86\Debug\09a-CirkelKlikker.csproj.CoreCompileInputs.cache
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\CirkelKlikker\obj\x86\Debug\CirkelKlikker.exe
+D:\Programming Projects\IdeaProjects\KI_INFOB1MNP\Demo-cs-MNP\CirkelKlikker\obj\x86\Debug\CirkelKlikker.pdb
