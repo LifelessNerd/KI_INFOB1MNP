@@ -47,8 +47,7 @@ namespace SchetsEditor
                 string tekst = c.ToString();
                 SizeF sz = 
                 gr.MeasureString(tekst, font, this.startpunt, StringFormat.GenericTypographic);
-                gr.DrawString   (tekst, font, kwast, 
-                                              this.startpunt, StringFormat.GenericTypographic);
+                gr.DrawString   (tekst, font, kwast, this.startpunt, StringFormat.GenericTypographic);
                 // gr.DrawRectangle(Pens.Black, startpunt.X, startpunt.Y, sz.Width, sz.Height);
                 startpunt.X += (int)sz.Width;
                 s.Invalidate();
@@ -82,6 +81,13 @@ namespace SchetsEditor
         {   base.MuisLos(s, p);
             this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p);
             s.Invalidate();
+
+            //Checken welke tool gebruikt wordt???
+            //if ()
+            GetekendVierkant getekendVierkant = new GetekendVierkant(TweepuntTool.Punten2Rechthoek(this.startpunt, p), kwast, false);
+            Schets schets = new Schets();
+            schets.getekendeVierkanten.Add(getekendVierkant);
+            schets.getekendeVierkanten.ForEach(Console.WriteLine);
         }
         public override void Letter(SchetsControl s, char c)
         {
@@ -99,6 +105,7 @@ namespace SchetsEditor
 
         public override void Bezig(Graphics g, Point p1, Point p2)
         {   g.DrawRectangle(MaakPen(kwast,3), TweepuntTool.Punten2Rechthoek(p1, p2));
+            
         }
         
     }

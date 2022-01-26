@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="getekendeObject.cs" />
     <Compile Include="Hoofdscherm.cs">
       <SubType>Form</SubType>
     </Compile>
