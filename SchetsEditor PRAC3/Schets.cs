@@ -6,10 +6,10 @@ namespace SchetsEditor
 {
     public class Schets
     {
-        private Bitmap bitmap;
+        public Bitmap bitmap;
 
-        public List<GetekendVierkant> getekendeVierkanten = new List<GetekendVierkant>();
-        //Moet eigk ergens anders heen, want hij wordt opnieuw gedeclareerd elke keer als er iets getekend wordt
+        public List<GetekendeObjecten> getekendeObjectenLijst = new List<GetekendeObjecten>();
+        
         
         public Schets()
         {
@@ -40,6 +40,8 @@ namespace SchetsEditor
         {
             Graphics gr = Graphics.FromImage(bitmap);
             gr.FillRectangle(Brushes.White, 0, 0, bitmap.Width, bitmap.Height);
+            getekendeObjectenLijst.Clear();
+            Console.WriteLine("CLEARED\n\n\n\n\n\n\n");
         }
         public void Roteer()
         {

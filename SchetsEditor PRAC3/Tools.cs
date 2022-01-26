@@ -79,23 +79,19 @@ namespace SchetsEditor
         }
         public override void MuisLos(SchetsControl s, Point p)
         {   base.MuisLos(s, p);
-            this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p);
+            this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p, s);
             s.Invalidate();
 
-            //Checken welke tool gebruikt wordt???
-            //if ()
-            GetekendVierkant getekendVierkant = new GetekendVierkant(TweepuntTool.Punten2Rechthoek(this.startpunt, p), kwast, false);
-            Schets schets = new Schets();
-            schets.getekendeVierkanten.Add(getekendVierkant);
-            schets.getekendeVierkanten.ForEach(Console.WriteLine);
         }
         public override void Letter(SchetsControl s, char c)
         {
         }
         public abstract void Bezig(Graphics g, Point p1, Point p2);
         
-        public virtual void Compleet(Graphics g, Point p1, Point p2)
+        public virtual void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
         {   this.Bezig(g, p1, p2);
+
+            
         }
     }
 
@@ -107,15 +103,25 @@ namespace SchetsEditor
         {   g.DrawRectangle(MaakPen(kwast,3), TweepuntTool.Punten2Rechthoek(p1, p2));
             
         }
-        
+        public override void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
+        {
+            base.Compleet(g, p1, p2, s);
+            //Toegevoegd
+            GetekendeObjecten getekendObject = new GetekendeObjecten(this.ToString(), p1, p2, Punten2Rechthoek(p1, p2), kwast, false );
+            s.Schets.getekendeObjectenLijst.Add(getekendObject);
+        }
+
+
     }
     
     public class VolRechthoekTool : RechthoekTool
     {
         public override string ToString() { return "vlak"; }
 
-        public override void Compleet(Graphics g, Point p1, Point p2)
+        public override void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
         {   g.FillRectangle(kwast, TweepuntTool.Punten2Rechthoek(p1, p2));
+            GetekendeObjecten getekendObject = new GetekendeObjecten(this.ToString(), p1, p2, Punten2Rechthoek(p1, p2), kwast, true);
+            s.Schets.getekendeObjectenLijst.Add(getekendObject);
         }
         
     }
@@ -127,6 +133,14 @@ namespace SchetsEditor
         public override void Bezig(Graphics g, Point p1, Point p2)
         {   g.DrawLine(MaakPen(this.kwast,3), p1, p2);
         }
+        //Compleet toegevoegd..deze was er eerst niet, waarom niet? hopelijk functioneert het alsnog
+        public override void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
+        {
+            base.Compleet(g, p1, p2, s);
+            GetekendeObjecten getekendObject = new GetekendeObjecten(this.ToString(), p1, p2, kwast);
+            s.Schets.getekendeObjectenLijst.Add(getekendObject);
+
+        }
     }
 
     public class PenTool : LijnTool
@@ -137,14 +151,31 @@ namespace SchetsEditor
         {   this.MuisLos(s, p);
             this.MuisVast(s, p);
         }
+        //Compleet zelf toegveoegd hopelijk werkt het 
+        public override void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
+        {
+            base.Compleet(g, p1, p2, s);
+            //Hier graag op een of andere manier een lijst met lijntjes krijgen en die erin stoppen, waar haal ik die vandaan?
+            GetekendeObjecten getekendObject = new GetekendeObjecten(this.ToString(), p1, p2, Punten2Rechthoek(p1, p2), kwast, false);
+            s.Schets.getekendeObjectenLijst.Add(getekendObject);
+        }
     }
     
     public class GumTool : PenTool
     {
         public override string ToString() { return "gum"; }
 
-        public override void Bezig(Graphics g, Point p1, Point p2)
-        {   g.DrawLine(MaakPen(Brushes.White, 7), p1, p2);
+        public override void MuisDrag(SchetsControl s, Point p)
+        {
+            base.MuisDrag(s, p);
+        }
+        public override void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
+        {
+            g.FillRectangle(Brushes.White, 0, 0, s.Schets.bitmap.Width, s.Schets.bitmap.Height);
+            foreach (GetekendeObjecten getekendVierkant in s.Schets.getekendeObjectenLijst)
+            {
+                getekendVierkant.Teken(getekendVierkant, g);
+            }
         }
     }
 }
