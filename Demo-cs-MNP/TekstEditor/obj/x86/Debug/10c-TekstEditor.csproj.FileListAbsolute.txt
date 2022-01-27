@@ -1,0 +1,7 @@
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Demo-cs-MNP\TekstEditor\bin\Debug\TekstEditor.exe.config
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Demo-cs-MNP\TekstEditor\bin\Debug\TekstEditor.exe
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Demo-cs-MNP\TekstEditor\bin\Debug\TekstEditor.pdb
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Demo-cs-MNP\TekstEditor\obj\x86\Debug\10c-TekstEditor.csproj.SuggestedBindingRedirects.cache
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Demo-cs-MNP\TekstEditor\obj\x86\Debug\10c-TekstEditor.csproj.CoreCompileInputs.cache
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Demo-cs-MNP\TekstEditor\obj\x86\Debug\TekstEditor.exe
+C:\Users\Menee\Documents\GitHub\KI_INFOB1MNP\Demo-cs-MNP\TekstEditor\obj\x86\Debug\TekstEditor.pdb

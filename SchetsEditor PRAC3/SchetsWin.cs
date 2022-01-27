@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Resources;
+using System.IO;
 
 namespace SchetsEditor
 {
@@ -97,8 +98,11 @@ namespace SchetsEditor
             ToolStripMenuItem menu = new ToolStripMenuItem("File");
             menu.MergeAction = MergeAction.MatchOnly;
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
+            menu.DropDownItems.Add("Opslaan als", null, schetscontrol.Opslaan);
             menuStrip.Items.Add(menu);
         }
+
+        
 
         private void maakToolMenu(ICollection<ISchetsTool> tools)
         {   

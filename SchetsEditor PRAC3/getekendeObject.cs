@@ -59,34 +59,9 @@ namespace SchetsEditor
                 gr.DrawLine(new Pen(getekendObject.kleur, 3), getekendObject.p1, getekendObject.p2);
             }
         }
+        public override string ToString()
+        {
+            return "type=" + type +"|vierkant=" + vierkant + "|p1=" + p1 + "|p2=" + p2 + "|kleur=" + kleur + "|gevuld?=" + gevuld;
+        }
     } 
-    public class GetekendeLijntjes
-    {
-        public int x { set; get; }
-        public int y { set; get; }
-        public Color kleur { set; get; }
-
-        public GetekendeLijntjes(int x, int y, Color kleur)
-        {
-            this.x = x;
-            this.y = y;
-            this.kleur = kleur;
-        }
-    }
-    public class Tekst
-    {
-        public int x { get; set; }
-        public int y { get; set; }
-        public Color kleur { set; get; }
-        public SizeF sizeF { get; set; }
-
-        public Tekst(int x, int y, Color kleur, SizeF sizeF)
-        {
-            this.x=x;
-            this.y=y;
-            this.kleur=kleur;
-            this.sizeF = sizeF;
-        }
-    }
-
 }

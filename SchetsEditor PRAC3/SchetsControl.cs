@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Windows.Forms;
 
 namespace SchetsEditor
@@ -53,6 +54,30 @@ namespace SchetsEditor
         public void VeranderKleurViaMenu(object obj, EventArgs ea)
         {   string kleurNaam = ((ToolStripMenuItem)obj).Text;
             penkleur = Color.FromName(kleurNaam);
+        }
+        public void Opslaan(object obj, EventArgs ea)
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Title = "Opslaan als";
+            saveDialog.Filter = "Tekstfiles|*.txt|Alle files|*.*";
+
+            if (saveDialog.ShowDialog() == DialogResult.OK && saveDialog.FileName != null)
+            {
+                StreamWriter writer = new StreamWriter(saveDialog.OpenFile());
+
+                for (int i = 0; i < schets.getekendeObjectenLijst.Count; i++)
+                {
+                    writer.WriteLine(schets.getekendeObjectenLijst[i].ToString());
+                }
+
+                writer.Dispose();
+
+                writer.Close();
+            }
+        }
+        public void Openen(object obj, EventArgs ea)
+        {
+
         }
     }
 }
