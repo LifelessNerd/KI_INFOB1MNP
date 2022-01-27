@@ -50,7 +50,14 @@ namespace SchetsEditor
         }
         public void Teken(GetekendeObjecten getekendObject, Graphics gr)
         {
-
+            if (getekendObject.type == "vlak")
+            {
+                gr.FillRectangle(kleur, vierkant);
+            }
+            if (getekendObject.type == "lijn")
+            {
+                gr.DrawLine(new Pen(getekendObject.kleur, 3), getekendObject.p1, getekendObject.p2);
+            }
         }
     } 
     public class GetekendeLijntjes

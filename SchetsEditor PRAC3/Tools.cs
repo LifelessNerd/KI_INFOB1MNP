@@ -146,7 +146,6 @@ namespace SchetsEditor
     public class PenTool : LijnTool
     {
         public override string ToString() { return "pen"; }
-
         public override void MuisDrag(SchetsControl s, Point p)
         {   this.MuisLos(s, p);
             this.MuisVast(s, p);
@@ -158,9 +157,9 @@ namespace SchetsEditor
             //Hier graag op een of andere manier een lijst met lijntjes krijgen en die erin stoppen, waar haal ik die vandaan?
             GetekendeObjecten getekendObject = new GetekendeObjecten(this.ToString(), p1, p2, Punten2Rechthoek(p1, p2), kwast, false);
             s.Schets.getekendeObjectenLijst.Add(getekendObject);
+            
         }
     }
-    
     public class GumTool : PenTool
     {
         public override string ToString() { return "gum"; }
@@ -171,11 +170,58 @@ namespace SchetsEditor
         }
         public override void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
         {
-            g.FillRectangle(Brushes.White, 0, 0, s.Schets.bitmap.Width, s.Schets.bitmap.Height);
-            foreach (GetekendeObjecten getekendVierkant in s.Schets.getekendeObjectenLijst)
+
+
+            //Checkt op welk object geklikt wordt
+            for (int i = s.Schets.getekendeObjectenLijst.Count; i > 0; i--)
             {
-                getekendVierkant.Teken(getekendVierkant, g);
+                GetekendeObjecten getekendObject0 = s.Schets.getekendeObjectenLijst[i - 1];
+                if (getekendObject0.type == "rechthoek" || getekendObject0.type == "vlak")
+                {
+                    if (p1.X >= getekendObject0.vierkant.X && p1.X <= getekendObject0.vierkant.X + getekendObject0.vierkant.Width)
+                    {
+                        if (p1.Y >= getekendObject0.vierkant.Y && p1.Y <= getekendObject0.vierkant.Y + getekendObject0.vierkant.Height)
+                        {
+                            Console.WriteLine("Succes. Gum ligt in vierkant");
+                            s.Schets.getekendeObjectenLijst.Remove(getekendObject0);
+                            Graphics gr = Graphics.FromImage(s.Schets.bitmap);
+                            gr.FillRectangle(Brushes.White, 0, 0, s.Schets.bitmap.Width, s.Schets.bitmap.Height);
+                            foreach (GetekendeObjecten getekendObject in s.Schets.getekendeObjectenLijst)
+                            {
+
+                                getekendObject.Teken(getekendObject, g);
+
+                            }
+
+                        }
+                    }
+                }
+                if (getekendObject0.type == "lijn")
+                {
+                    if (p1.X >= getekendObject0.p1.X && p1.X <= getekendObject0.p1.X + 20)
+                    {
+                        s.Schets.getekendeObjectenLijst.Remove(getekendObject0);
+                        Console.WriteLine("Succes gum ligt op lijn");
+                        Graphics gr = Graphics.FromImage(s.Schets.bitmap);
+                        gr.FillRectangle(Brushes.White, 0, 0, s.Schets.bitmap.Width, s.Schets.bitmap.Height);
+                        foreach (GetekendeObjecten getekendVierkant in s.Schets.getekendeObjectenLijst)
+                        {
+
+                            getekendVierkant.Teken(getekendVierkant, g);
+
+                        }
+                    }
+                }
+                //if (getekendObject0.type == "vlak")
+                {
+                    
+                    {
+
+                    }
+                }
             }
+            
+            
         }
     }
 }
