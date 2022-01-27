@@ -99,6 +99,8 @@ namespace SchetsEditor
             menu.MergeAction = MergeAction.MatchOnly;
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
             menu.DropDownItems.Add("Opslaan als", null, schetscontrol.Opslaan);
+            menu.DropDownItems.Add("Openen", null, schetscontrol.Openen);
+            //Extra menu item toegevoegd: opslaan en openen
             menuStrip.Items.Add(menu);
         }
 
@@ -169,20 +171,14 @@ namespace SchetsEditor
             b.Location = new Point( 80, 0); 
             b.Click += schetscontrol.Roteer; 
             paneel.Controls.Add(b);
+
+            //Button voor het verander van kleur (ipv dropdown)
+            b = new Button();
+            b.Text = "Color";
+            b.Location = new Point(160, 0);
+            b.Click += schetscontrol.VeranderKleur;
+            paneel.Controls.Add(b);
             
-            l = new Label();  
-            l.Text = "Penkleur:"; 
-            l.Location = new Point(180, 3); 
-            l.AutoSize = true;               
-            paneel.Controls.Add(l);
-            
-            cbb = new ComboBox(); cbb.Location = new Point(240, 0); 
-            cbb.DropDownStyle = ComboBoxStyle.DropDownList; 
-            cbb.SelectedValueChanged += schetscontrol.VeranderKleur;
-            foreach (string k in kleuren)
-                cbb.Items.Add(k);
-            cbb.SelectedIndex = 0;
-            paneel.Controls.Add(cbb);
         }
     }
 }

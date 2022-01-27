@@ -8,6 +8,7 @@ namespace SchetsEditor
     {
         public Bitmap bitmap;
 
+        //Lijst om alle objecten in op te slaan
         public List<GetekendeObjecten> getekendeObjectenLijst = new List<GetekendeObjecten>();
         
         
@@ -41,7 +42,7 @@ namespace SchetsEditor
             Graphics gr = Graphics.FromImage(bitmap);
             gr.FillRectangle(Brushes.White, 0, 0, bitmap.Width, bitmap.Height);
             getekendeObjectenLijst.Clear();
-            Console.WriteLine("CLEARED\n\n\n\n\n\n\n");
+
         }
         public void Roteer()
         {

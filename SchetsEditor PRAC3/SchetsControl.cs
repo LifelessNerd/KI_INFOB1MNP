@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -47,14 +48,25 @@ namespace SchetsEditor
             schets.Roteer();
             this.Invalidate();
         }
+        //Verander kleur met een mooi menutje
         public void VeranderKleur(object obj, EventArgs ea)
-        {   string kleurNaam = ((ComboBox)obj).Text;
-            penkleur = Color.FromName(kleurNaam);
+        {
+            ColorDialog colorDialog = new ColorDialog();
+
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                penkleur = colorDialog.Color;
+            }
+            else 
+            { 
+                penkleur = Color.Black; 
+            }
         }
         public void VeranderKleurViaMenu(object obj, EventArgs ea)
         {   string kleurNaam = ((ToolStripMenuItem)obj).Text;
             penkleur = Color.FromName(kleurNaam);
         }
+        //Opslaan
         public void Opslaan(object obj, EventArgs ea)
         {
             SaveFileDialog saveDialog = new SaveFileDialog();
@@ -68,16 +80,55 @@ namespace SchetsEditor
                 for (int i = 0; i < schets.getekendeObjectenLijst.Count; i++)
                 {
                     writer.WriteLine(schets.getekendeObjectenLijst[i].ToString());
+                    //De .ToString is een eigen mehtode die in eigen format naar string converteert
                 }
-
-                writer.Dispose();
+                //writer.Dispose();
 
                 writer.Close();
             }
         }
         public void Openen(object obj, EventArgs ea)
         {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Title = "Open...";
+            openDialog.Filter = "Tekstfiles|*.txt|Alle files|*.*";
 
+            if (openDialog.ShowDialog() == DialogResult.OK)
+            {
+                Invalidate();
+                schets.Schoon();
+                
+                StreamReader reader = new StreamReader(openDialog.OpenFile());
+                for (int i = 0; i < File.ReadAllLines(openDialog.FileName).Length; i++)
+                {
+                    schets.getekendeObjectenLijst.Add(ToShape(reader.ReadLine()));
+                    //toShape pakt een string uit de file, converteert deze naar GetekendeObjecten-object
+                    //Deze objecten gaan vervolgens in de lijst
+                }
+                Graphics gr = MaakBitmapGraphics();
+                foreach (GetekendeObjecten getekendObject in schets.getekendeObjectenLijst)
+                {
+                    getekendObject.Teken(getekendObject, gr);
+                }
+                Invalidate();
+            }
+
+        }
+        public GetekendeObjecten ToShape(string input)
+            //Split de string van de file meerdere keren en op verschillende manier om alle info eruit te halen
+            //en op een mooie manier op te slaan zodat ze direct weer gebruikt kunnen worden om een object te maken
+        {
+            string[] pr = input.Split('|'); //properties
+            string[] p1 = pr[1].Split(',');
+            string[] p2 = pr[2].Split(',');
+            Point pt1 = new Point(int.Parse(p1[0]), int.Parse(p1[1]));
+            Point pt2 = new Point(int.Parse(p2[0]), int.Parse(p2[1]));
+            string[] vkList = pr[3].Split(',');
+            Rectangle vierkant = new Rectangle(int.Parse(vkList[0]), int.Parse(vkList[1]), int.Parse(vkList[2]), int.Parse(vkList[3]));
+            string[] kleur = pr[4].Split(',');
+            Brush brush = new SolidBrush(Color.FromArgb(int.Parse(kleur[0]), int.Parse(kleur[1]), int.Parse(kleur[2])));
+            GetekendeObjecten getekendeObjecten = new GetekendeObjecten(pr[0],pt1,pt2,vierkant, brush, true);
+            return getekendeObjecten;
         }
     }
 }

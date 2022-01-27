@@ -24,6 +24,7 @@ namespace SchetsEditor
         public virtual void MuisVast(SchetsControl s, Point p)
         {   
             startpunt = p;
+            
         }
         public virtual void MuisLos(SchetsControl s, Point p)
         {   kwast = new SolidBrush(s.PenKleur);
@@ -109,6 +110,7 @@ namespace SchetsEditor
             //Toegevoegd
             GetekendeObjecten getekendObject = new GetekendeObjecten(this.ToString(), p1, p2, Punten2Rechthoek(p1, p2), kwast, false );
             s.Schets.getekendeObjectenLijst.Add(getekendObject);
+            //Maakt nieuw object aan met properties en voegt hem toe aan lijst
         }
 
 
@@ -122,8 +124,9 @@ namespace SchetsEditor
         {   g.FillRectangle(kwast, TweepuntTool.Punten2Rechthoek(p1, p2));
             GetekendeObjecten getekendObject = new GetekendeObjecten(this.ToString(), p1, p2, Punten2Rechthoek(p1, p2), kwast, true);
             s.Schets.getekendeObjectenLijst.Add(getekendObject);
+            //Maakt nieuw object aan met properties en voegt hem toe aan lijst
         }
-        
+
     }
 
     public class LijnTool : TweepuntTool
@@ -134,12 +137,13 @@ namespace SchetsEditor
         {   g.DrawLine(MaakPen(this.kwast,3), p1, p2);
         }
         //Compleet toegevoegd..deze was er eerst niet, waarom niet? hopelijk functioneert het alsnog
+        //ja dat doet het dank moeder maria
         public override void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
         {
             base.Compleet(g, p1, p2, s);
             GetekendeObjecten getekendObject = new GetekendeObjecten(this.ToString(), p1, p2, kwast);
             s.Schets.getekendeObjectenLijst.Add(getekendObject);
-
+            //Maakt nieuw object aan met properties en voegt hem toe aan lijst
         }
     }
 
@@ -150,14 +154,15 @@ namespace SchetsEditor
         {   this.MuisLos(s, p);
             this.MuisVast(s, p);
         }
-        //Compleet zelf toegveoegd hopelijk werkt het 
+        //Compleet zelf toegveoegd hopelijk werkt het yes
         public override void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
         {
             base.Compleet(g, p1, p2, s);
-            //Hier graag op een of andere manier een lijst met lijntjes krijgen en die erin stoppen, waar haal ik die vandaan?
+            //TODO: Hier graag op een of andere manier een lijst met lijntjes krijgen en die erin stoppen, waar haal ik die vandaan?
             GetekendeObjecten getekendObject = new GetekendeObjecten(this.ToString(), p1, p2, Punten2Rechthoek(p1, p2), kwast, false);
             s.Schets.getekendeObjectenLijst.Add(getekendObject);
-            
+            //Maakt nieuw object aan met properties en voegt hem toe aan lijst
+
         }
     }
     public class GumTool : PenTool
@@ -172,17 +177,17 @@ namespace SchetsEditor
         {
 
 
-            //Checkt op welk object geklikt wordt
+            //Checkt of er op een vierkant geklikt wordt
             for (int i = s.Schets.getekendeObjectenLijst.Count; i > 0; i--)
             {
                 GetekendeObjecten getekendObject0 = s.Schets.getekendeObjectenLijst[i - 1];
-                if (getekendObject0.type == "rechthoek" || getekendObject0.type == "vlak")
+                if (getekendObject0.type == "rechthoek" || getekendObject0.type == "vlak") //vlak werkt niet?
                 {
                     if (p1.X >= getekendObject0.vierkant.X && p1.X <= getekendObject0.vierkant.X + getekendObject0.vierkant.Width)
                     {
                         if (p1.Y >= getekendObject0.vierkant.Y && p1.Y <= getekendObject0.vierkant.Y + getekendObject0.vierkant.Height)
                         {
-                            Console.WriteLine("Succes. Gum ligt in vierkant");
+                            //Zo ja, verwijder het object van de lijst en teken alles opnieuw
                             s.Schets.getekendeObjectenLijst.Remove(getekendObject0);
                             Graphics gr = Graphics.FromImage(s.Schets.bitmap);
                             gr.FillRectangle(Brushes.White, 0, 0, s.Schets.bitmap.Width, s.Schets.bitmap.Height);
@@ -196,12 +201,12 @@ namespace SchetsEditor
                         }
                     }
                 }
+                //Zie uitleg vierkant hierboven
                 if (getekendObject0.type == "lijn")
                 {
                     if (p1.X >= getekendObject0.p1.X && p1.X <= getekendObject0.p1.X + 20)
                     {
                         s.Schets.getekendeObjectenLijst.Remove(getekendObject0);
-                        Console.WriteLine("Succes gum ligt op lijn");
                         Graphics gr = Graphics.FromImage(s.Schets.bitmap);
                         gr.FillRectangle(Brushes.White, 0, 0, s.Schets.bitmap.Width, s.Schets.bitmap.Height);
                         foreach (GetekendeObjecten getekendVierkant in s.Schets.getekendeObjectenLijst)
@@ -216,11 +221,14 @@ namespace SchetsEditor
                 {
                     
                     {
-
+                        // too bad
                     }
                 }
             }
-            
+
+            {
+                //
+            }
             
         }
     }

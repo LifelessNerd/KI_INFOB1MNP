@@ -40,7 +40,7 @@ namespace SchetsEditor
             this.penLijntjes = penLijntjes;
             this.kleur=kleur;
         }
-        //Overload voor text - TODO: Hoe wordt tekst gedrawt? 
+        //Overload voor text - TODO: alles
         //Miss ook nog coords nodig?
         public GetekendeObjecten(string type, List<char> karakters, Brush kleur)
         {
@@ -50,6 +50,7 @@ namespace SchetsEditor
         }
         public void Teken(GetekendeObjecten getekendObject, Graphics gr)
         {
+            //Objecten worden getekend op basis van wat voor type hij is
             if (getekendObject.type == "vlak")
             {
                 gr.FillRectangle(kleur, vierkant);
@@ -61,7 +62,10 @@ namespace SchetsEditor
         }
         public override string ToString()
         {
-            return "type=" + type +"|vierkant=" + vierkant + "|p1=" + p1 + "|p2=" + p2 + "|kleur=" + kleur + "|gevuld?=" + gevuld;
+            //Voor de file converter
+            SolidBrush brush = (SolidBrush)kleur;
+            return type +"|" + p1.X + "," + p1.Y + "|" + p2.X + "," + p2.Y + "|" + vierkant.X + "," + vierkant.Y + "," + vierkant.Width + "," + vierkant.Height + "|" + brush.Color.R + "," + brush.Color.G + "," + brush.Color.B + "|" + gevuld;
         }
+        
     } 
 }
